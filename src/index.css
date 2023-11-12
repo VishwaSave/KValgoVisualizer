@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#id{
+    background-color: rgb(184, 184, 226);
+}
