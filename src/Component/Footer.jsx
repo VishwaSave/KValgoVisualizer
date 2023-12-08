@@ -39,6 +39,7 @@ export default function Footer() {
             min="0"
             max="6"
             defaultValue="1"
+            id="speedController"
             onMouseDown={(e)=>{
                     e.currentTarget.classList.remove('cursor-grab')
                     e.currentTarget.classList.add('cursor-grabbing')

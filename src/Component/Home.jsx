@@ -9,9 +9,6 @@ const HomePage = () => {
     { name: 'Sorting Algorithms', imag: sortImg, description: 'Visualize various sorting algorithms.' },
     { name: 'Linked List', imag: list, description: 'Explore linked list operations and algorithms.' },
     { name: 'Binary Search Tree', imag: bst, description: 'Visualize operations on binary search trees.' },
-    { name: 'Sorting Algorithms', imag: sortImg, description: 'Visualize various sorting algorithms.' },
-    { name: 'Linked List', imag: list, description: 'Explore linked list operations and algorithms.' },
-    { name: 'Binary Search Tree', imag: bst, description: 'Visualize operations on binary search trees.' },
   ];
 
   return (
@@ -45,7 +42,7 @@ const HomePage = () => {
           <Link to="/contact" className="hover:underline">Contact</Link>
         </div>
         <div className="mt-4">
-          &copy; {new Date().getFullYear()} Algorithm Visualizer. All Rights Reserved.
+          &copy; {new Date().getFullYear()} KValgoVisualizer. All Rights Reserved.
         </div>
       </div>
     </div>

@@ -15,63 +15,292 @@ export default function Quick(props) {
   let a = [],
     b = [];
   useEffect(() => {
-    document.getElementById("newArray").value=arr
+    document.getElementById("newArray").value = arr;
     arr.map((val, ind) => {
       a.push(document.getElementById("bar" + ind));
+      a[ind].style.transition = "all 3s ease-out";
     });
   }, [arr]);
 
-    let temparr = arr
-    function sorting() {
-      if (temparr.length <= 1) {
-        return temparr;
-      }
-    
-      const stack = [];
-      stack.push(0);
-      stack.push(temparr.length - 1);
-    
-      while (stack.length > 0) {
-        const end = stack.pop();
-        const start = stack.pop();
-        
-        if (start < end) {
-          const pivotIndex = partition(temparr, start, end);
-          
-          stack.push(start);
-          stack.push(pivotIndex - 1);
-    
-          stack.push(pivotIndex + 1);
-          stack.push(end);
-        }
-      }
-    
-      return stack;
+  let temparr = arr,
+    txt,
+    k,
+    c;
+  const [tarr, newTarr] = useState([]);
+  const quickSort = async (narr, low, high) => {
+    if (low < high) {
+      const partitionIndex = await partition(narr, low, high);
+      await Promise.all([
+        quickSort(narr, low, partitionIndex - 1),
+        quickSort(narr, partitionIndex + 1, high),
+      ]);
+    } else {
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      b[0].classList.add("bg-gray-700");
+      txt =
+        "Working on partition [" +
+        narr[high] +
+        "] (index " +
+        high +
+        " to " +
+        high +
+        "). Since partition size == 1, element inside partition is necessarily at sorted position.";
+      c.innerText = txt;
+      msg.text = txt;
+      speech.speak(msg);
+      a[high].classList.remove("bg-green-600");
+      a[high].classList.remove("bg-red-600");
+      a[high].classList.remove("bg-blue-600");
+      a[high].classList.remove("bg-yellow-600");
+      a[high].classList.add("bg-yellow-600");
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
     }
-    
-    function partition(arr, start, end) {
-      const pivotValue = arr[end];
-      let pivotIndex = start;
-      a[start].classList.add('bg-orange-600');
-      for (let i = start+1; i < end; i++) {
-        a[i].classList.add('bg-red-600')
-        if (arr[i] < pivotValue) {
-          [arr[i], arr[pivotIndex]] = [arr[pivotIndex], arr[i]];
-          [a[i], a[pivotIndex]] = [a[pivotIndex], a[i]];
-          pivotIndex++;
-        }
+  };
+
+  const partition = async (narr, low, high) => {
+    const pivot = narr[low];
+
+    let i = low;
+    for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+    b[0].classList.add("bg-gray-700");
+    b[1].classList.add("bg-gray-700");
+    b[2].classList.add("bg-gray-700");
+    txt =
+      "Working on partition [" +
+      narr +
+      "] (index " +
+      low +
+      " to " +
+      (high + 1) +
+      "). Selecting " +
+      narr[low] +
+      " as pivot. (storeIndex = " +
+      i +
+      ").";
+    c.innerText = txt;
+    msg.text =
+      "Working on given partition (index " +
+      low +
+      " to " +
+      high +
+      "). Selecting " +
+      narr[low] +
+      " as pivot. (storeIndex = " +
+      i +
+      ").";
+    speech.speak(msg);
+    a[low].classList.remove("bg-green-600");
+    a[low].classList.remove("bg-red-600");
+    a[low].classList.remove("bg-blue-600");
+    a[low].classList.remove("bg-yellow-600");
+    a[low].classList.add("bg-yellow-600");
+    await new Promise((resolve) => {
+      msg.addEventListener("end", () => {
+        resolve();
+      });
+    });
+    for (let j = low + 1; j <= high; j++) {
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      b[3].classList.add("bg-gray-700");
+      b[4].classList.add("bg-gray-700");
+      txt =
+        "Checking if " +
+        narr[j] +
+        " < " +
+        pivot +
+        " (pivot) (or if they are equal but 50% lucky).";
+      c.innerText = txt;
+      msg.text =
+        "Checking if " +
+        narr[j] +
+        " less than " +
+        pivot +
+        " (pivot) (or if they are equal but 50% lucky).";
+      speech.speak(msg);
+      a[j].classList.remove("bg-green-600");
+      a[j].classList.remove("bg-red-600");
+      a[j].classList.remove("bg-blue-600");
+      a[j].classList.remove("bg-yellow-600");
+      a[j].classList.add("bg-red-600");
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
+      if (narr[j] < pivot) {
+        i++;
+        for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+        b[3].classList.add("bg-gray-700");
+        b[5].classList.add("bg-gray-700");
+        txt =
+          narr[j] +
+          " < " +
+          pivot +
+          " (pivot) is true. Swapping index " +
+          (j + 1) +
+          " (value = " +
+          narr[j] +
+          ") with element at storeIndex " +
+          (i - 1) +
+          " (value = " +
+          narr[i] +
+          "). (Value of storeIndex is now = " +
+          i +
+          ").";
+        c.innerText = txt;
+        msg.text =
+          narr[j] +
+          " less than " +
+          pivot +
+          " (pivot) is true. Swapping index " +
+          (j + 1) +
+          " (value = " +
+          narr[j] +
+          ") with element at storeIndex " +
+          (i - 1) +
+          " (value = " +
+          narr[i] +
+          "). (Value of storeIndex is now = " +
+          i +
+          ").";
+        speech.speak(msg);
+        [narr[i], narr[j]] = [narr[j], narr[i]];
+        [a[i].style.height, a[j].style.height] = [
+          a[j].style.height,
+          a[i].style.height,
+        ];
+        [a[j].children[0].innerText, a[i].children[0].innerText] = [
+          a[i].children[0].innerText,
+          a[j].children[0].innerText,
+        ];
+        a[j].classList.remove("bg-green-600");
+        a[j].classList.remove("bg-red-600");
+        a[j].classList.remove("bg-blue-600");
+        a[j].classList.remove("bg-yellow-600");
+        a[j].classList.add("bg-blue-600");
+        a[i].classList.remove("bg-green-600");
+        a[i].classList.remove("bg-red-600");
+        a[i].classList.remove("bg-blue-600");
+        a[i].classList.remove("bg-yellow-600");
+        a[i].classList.add("bg-green-600");
+        newTarr([...narr]);
+        await new Promise((resolve) => {
+          msg.addEventListener("end", () => {
+            resolve();
+          });
+        });
+      } else {
+        a[j].classList.remove("bg-green-600");
+        a[j].classList.remove("bg-red-600");
+        a[j].classList.remove("bg-blue-600");
+        a[j].classList.remove("bg-yellow-600");
+        a[j].classList.add("bg-blue-600");
       }
-    
-      [arr[pivotIndex], arr[end]] = [arr[end], arr[pivotIndex]];
-      return pivotIndex;
-    }   
-  
+    }
+    for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+    txt = "Iteration complete";
+    c.innerText = txt;
+    msg.text = txt;
+    speech.speak(msg);
+    await new Promise((resolve) => {
+      msg.addEventListener("end", () => {
+        resolve();
+      });
+    });
+    for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+    b[6].classList.add("bg-gray-700");
+    txt =
+      "Swapping pivot (index = " +
+      i +
+      ", value = " +
+      narr[i] +
+      ") with element at storeIndex - 1 (index = " +
+      (i - 1) +
+      ", value = " +
+      narr[i - 1] +
+      ").";
+    c.innerText = txt;
+    msg.text = txt;
+    speech.speak(msg);
+    [narr[low], narr[i]] = [narr[i], narr[low]];
+    [a[low].style.height, a[i].style.height] = [
+      a[i].style.height,
+      a[low].style.height,
+    ];
+    [a[low].children[0].innerText, a[i].children[0].innerText] = [
+      a[i].children[0].innerText,
+      a[low].children[0].innerText,
+    ];
+    a[low].classList.remove("bg-green-600");
+    a[low].classList.remove("bg-red-600");
+    a[low].classList.remove("bg-blue-600");
+    a[low].classList.remove("bg-yellow-600");
+    a[low].classList.add("bg-green-600");
+    a[i].classList.remove("bg-green-600");
+    a[i].classList.remove("bg-red-600");
+    a[i].classList.remove("bg-blue-600");
+    a[i].classList.remove("bg-yellow-600");
+    a[i].classList.add("bg-yellow-600");
+    newTarr([...narr]);
+    await new Promise((resolve) => {
+      msg.addEventListener("end", () => {
+        resolve();
+      });
+    });
+
+    return i;
+  };
+
+  const sorting = async () => {
+    c = document.getElementById("textContainer");
+    b = [
+      document.getElementById("br1"),
+      document.getElementById("br2"),
+      document.getElementById("br3"),
+      document.getElementById("br4"),
+      document.getElementById("br5"),
+      document.getElementById("br6"),
+      document.getElementById("br7"),
+    ];
+    if (!(arr.length==1)) {
+      await quickSort(temparr, 0, temparr.length - 1);
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      txt = "List is sorted!";
+    } else {
+      txt = "As the list only contains one element so no sorting is require";
+    }
+    c.innerText = txt;
+    msg.text = txt;
+    speech.speak(msg);
+    document.getElementById("stbtn").disabled = false;
+    document.getElementById(
+      "navbarContainer"
+    ).children[0].children[0].children[0].disabled = false;
+    for (
+      let i = 1;
+      i < document.getElementById("navbarContainer").children.length;
+      i++
+    ) {
+      document.getElementById("navbarContainer").children[
+        i
+      ].children[0].disabled = false;
+    }
+    await new Promise((resolve) => {
+      msg.addEventListener("end", () => {
+        resolve();
+      });
+    });
+  };
+
   return (
     <arrContext.Provider value={{ array: arr }}>
       <div className="w-[100vw] h-[100vh] bg-gray-900">
         <br />
         <br />
-        <Footer />
         <ArrInGraph />
         <Codesider />
         <Text />
@@ -126,9 +355,21 @@ export default function Quick(props) {
                 document
                   .getElementById("newArrContainer")
                   .classList.add("hidden");
-                const m=sorting();
-                console.log(m)
-                newArr(m)
+                document.getElementById("stbtn").disabled = true;
+                document.getElementById(
+                  "navbarContainer"
+                ).children[0].children[0].children[0].disabled = true;
+                for (
+                  let i = 1;
+                  i <
+                  document.getElementById("navbarContainer").children.length;
+                  i++
+                ) {
+                  document.getElementById("navbarContainer").children[
+                    i
+                  ].children[0].disabled = true;
+                }
+                sorting();
               }}
             >
               Sort
@@ -138,24 +379,24 @@ export default function Quick(props) {
             className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden"
             id="newArrContainer"
           >
-          <button
+            <button
               className="bg-green-700 px-2"
               onClick={(e) => {
                 e.preventDefault();
-                let array=[]
-                let i,a=parseInt(Math.random()*10);
-                let b=(a>=3)? a:5
-                for(i=0;i<b;i++){
-                    array[i]=parseInt(Math.random()*100)
+                let array = [];
+                let i,
+                  a = parseInt(Math.random() * 10);
+                let b = a >= 3 ? a : 5;
+                for (i = 0; i < b; i++) {
+                  array[i] = parseInt(Math.random() * 100);
                 }
                 let o = document.getElementById("barContainer");
                 o.innerHTML = ``;
                 array.map((val, ind) => {
-                    o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
-                      "bar" + ind
-                    }><span class="relative bottom-6">${val}</span></div>`;
-                    document.getElementById("bar" + ind).style.height =
-                      val + "%";
+                  o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
+                    "bar" + ind
+                  }><span class="relative bottom-6">${val}</span></div>`;
+                  document.getElementById("bar" + ind).style.height = val + "%";
                 });
                 newArr(
                   array.map((val) => {
@@ -167,7 +408,9 @@ export default function Quick(props) {
               Random
             </button>
             <form>
-              <label><b className="mx-2">OR</b>A = </label>
+              <label>
+                <b className="mx-2">OR</b>A ={" "}
+              </label>
               <input
                 type="text"
                 className="mr-2"
@@ -179,25 +422,30 @@ export default function Quick(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   let m = document.getElementById("newArray");
-                  let n = m.value.split(",");
-                  let o = document.getElementById("barContainer");
-                  o.innerHTML = ``;
-                  n.map((val, ind) => {
-                    if(val<=100){
-                      o.innerHTML += `<div class="w-[7%] bg-blue-300 m-1 text-center" id=${
-                        "bar" + ind
-                      }><span class="relative bottom-6">${val}</span></div>`;
-                      document.getElementById("bar" + ind).style.height =
-                        val + "%";
-                    }
-                    else
-                    alert("value above 100 are not allowed")
-                  });
-                  newArr(
+                  let regex = /^\d{1,2}(,\d{1,2})*$/;
+                  if (regex.test(m.value)) {
+                    let n = m.value.split(",");
+                    let o = document.getElementById("barContainer");
+                    o.innerHTML = ``;
                     n.map((val, ind) => {
-                      return parseInt(val);
-                    })
-                  );
+                      if (val <= 100) {
+                        o.innerHTML += `<div class="w-[7%] bg-blue-300 m-1 text-center" id=${
+                          "bar" + ind
+                        }><span class="relative bottom-6">${val}</span></div>`;
+                        document.getElementById("bar" + ind).style.height =
+                          val + "%";
+                      } else alert("value above 100 are not allowed");
+                    });
+                    newArr(
+                      n.map((val, ind) => {
+                        return parseInt(val);
+                      })
+                    );
+                  } else {
+                    alert(
+                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 2 digits or less and comma (,)"
+                    );
+                  }
                 }}
               >
                 Go

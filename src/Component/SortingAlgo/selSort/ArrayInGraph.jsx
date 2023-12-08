@@ -16,7 +16,7 @@ export default function ArrInGraph() {
           arr.map((val, ind) => {
             return (
               <div
-                className="w-[7%] bg-blue-300 m-1 text-center transition-all duration-[3s] ease-out"
+                className="w-[7%] bg-blue-300 m-1 text-center"
                 style={{
                   height: val + "%",
                 }}
