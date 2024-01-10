@@ -299,14 +299,12 @@ export default function Quick(props) {
   return (
     <arrContext.Provider value={{ array: arr }}>
       <div className="w-[100vw] h-[100vh] bg-gray-900">
-        <br />
-        <br />
         <ArrInGraph />
         <Codesider />
         <Text />
-        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex">
+        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex max-h-option">
           <button
-            className="bg-yellow-600 w-12 h-[100%] text-[3rem]"
+            className="bg-yellow-600 w-12 h-[100%] text-[3rem] max-h-option-button"
             onClick={(e) => {
               if (e.currentTarget.innerText == ">") {
                 e.currentTarget.innerText = "<";
@@ -323,9 +321,9 @@ export default function Quick(props) {
           >
             {"<"}
           </button>
-          <div className="w-[175px] bg-gray-300 ml-2" id="sort">
+          <div className="w-[175px] bg-gray-300 ml-2 max-h-option-subOption text-lg" id="sort">
             <button
-              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
                 let m = document.getElementById("newArrContainer");
                 if (m.classList.contains("hidden") === true) {
@@ -340,7 +338,7 @@ export default function Quick(props) {
               Create new Array
             </button>
             <button
-              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center max-h-sort"
               onClick={(e) => {
                 document.getElementById("stbtn").innerText = ">";
                 document.getElementById("sort").classList.add("hidden");
@@ -376,7 +374,7 @@ export default function Quick(props) {
             </button>
           </div>
           <div
-            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden"
+            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
             id="newArrContainer"
           >
             <button
@@ -409,11 +407,11 @@ export default function Quick(props) {
             </button>
             <form>
               <label>
-                <b className="mx-2">OR</b>A ={" "}
+                <b className="mx-2 max-h-newArr-b">OR</b>A ={" "}
               </label>
               <input
                 type="text"
-                className="mr-2"
+                className="mr-2 max-h-newArr-input"
                 defaultValue={arr}
                 id="newArray"
               />
@@ -428,13 +426,11 @@ export default function Quick(props) {
                     let o = document.getElementById("barContainer");
                     o.innerHTML = ``;
                     n.map((val, ind) => {
-                      if (val <= 100) {
                         o.innerHTML += `<div class="w-[7%] bg-blue-300 m-1 text-center" id=${
                           "bar" + ind
                         }><span class="relative bottom-6">${val}</span></div>`;
                         document.getElementById("bar" + ind).style.height =
                           val + "%";
-                      } else alert("value above 100 are not allowed");
                     });
                     newArr(
                       n.map((val, ind) => {
@@ -443,7 +439,7 @@ export default function Quick(props) {
                     );
                   } else {
                     alert(
-                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 2 digits or less and comma (,)"
+                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 2 digits or less and comma (,) and upto 20 elements/numbers are allowed"
                     );
                   }
                 }}

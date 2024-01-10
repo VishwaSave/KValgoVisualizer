@@ -110,6 +110,7 @@ export default function Merge(props) {
       document.getElementById("br4"),
       document.getElementById("br5"),
     ];
+    let ex=document.getElementById("extra").getBoundingClientRect(),h
     let result = [],
       temp,
       temp1,
@@ -125,8 +126,9 @@ export default function Merge(props) {
       rColor[ind] = val.style.backgroundColor;
     });
     while (leftIndex < left.length && rightIndex < right.length) {
-      l[leftIndex].classList.add("top-[70%]");
-      r[rightIndex].classList.add("top-[70%]");
+      h=l[leftIndex].getBoundingClientRect()
+      l[leftIndex].style.transform = `translateY(${(ex.bottom-h.bottom)-7}px)`;
+      r[rightIndex].style.transform = `translateY(${(ex.bottom-h.bottom)-7}px)`;
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[1].classList.add("bg-gray-700");
       txt =
@@ -237,7 +239,7 @@ export default function Merge(props) {
     msg.text = txt;
     speech.speak(msg);
     l.concat(r).map((val) => {
-      val.classList.remove("top-[70%]");
+      val.style.transform = `translateY(0px)`;
       val.classList.remove("bg-green-400");
       val.classList.remove("bg-red-600");
     });
@@ -258,14 +260,12 @@ export default function Merge(props) {
   return (
     <arrContext.Provider value={{ array: arr }}>
       <div className="w-[100vw] h-[100vh] bg-gray-900">
-        <br />
-        <br />
         <ArrInGraph />
         <Codesider />
         <Text />
-        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex">
+        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex max-h-option">
           <button
-            className="bg-yellow-600 w-12 h-[100%] text-[3rem]"
+            className="bg-yellow-600 w-12 h-[100%] text-[3rem] max-h-option-button"
             onClick={(e) => {
               if (e.currentTarget.innerText == ">") {
                 e.currentTarget.innerText = "<";
@@ -282,9 +282,9 @@ export default function Merge(props) {
           >
             {"<"}
           </button>
-          <div className="w-[175px] bg-gray-300 ml-2" id="sort">
+          <div className="w-[175px] bg-gray-300 ml-2 max-h-option-subOption text-lg" id="sort">
             <button
-              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
                 let m = document.getElementById("newArrContainer");
                 if (m.classList.contains("hidden") === true) {
@@ -299,7 +299,7 @@ export default function Merge(props) {
               Create new Array
             </button>
             <button
-              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center max-h-sort"
               onClick={async (e) => {
                 document.getElementById("stbtn").innerText = ">";
                 document.getElementById("sort").classList.add("hidden");
@@ -376,7 +376,7 @@ export default function Merge(props) {
             </button>
           </div>
           <div
-            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden"
+            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
             id="newArrContainer"
           >
             <button
@@ -409,11 +409,11 @@ export default function Merge(props) {
             </button>
             <form>
               <label>
-                <b className="mx-2">OR</b>A ={" "}
+                <b className="mx-2 max-h-newArr-b">OR</b>A ={" "}
               </label>
               <input
                 type="text"
-                className="mr-2"
+                className="mr-2 max-h-newArr-input"
                 defaultValue={arr}
                 id="newArray"
               />
@@ -422,19 +422,17 @@ export default function Merge(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   let m = document.getElementById("newArray");
-                  let regex = /^\d{1,2}(,\d{1,2})*$/;
+                  let regex=/^(?:[1-9]\d?|50)(?:,(?:[1-9]\d?|50)){0,9}$/
                   if (regex.test(m.value)) {
                     let n = m.value.split(",");
                     let o = document.getElementById("barContainer");
                     o.innerHTML = ``;
                     n.map((val, ind) => {
-                      if (val <= 50) {
                         o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
                           "bar" + ind
                         }><span class="relative bottom-6">${val}</span></div>`;
                         document.getElementById("bar" + ind).style.height =
                           val + "%";
-                      } else alert("Value above 50 are not allowed");
                     });
                     newArr(
                       n.map((val, ind) => {
@@ -443,7 +441,7 @@ export default function Merge(props) {
                     );
                   } else {
                     alert(
-                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 2 digits or less and comma (,)"
+                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 2 digits or less and comma (,) and upto 10 elements/numbers which are less than or equal to 50 are allowed"
                     );
                   }
                 }}

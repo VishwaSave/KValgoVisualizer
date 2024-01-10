@@ -7,11 +7,11 @@ export default function ArrInGraph() {
   const [arr, newArr] = useState(arrdetail.array);
   return (
     <>
-      <div className="w-[93%] h-[70%] flex flex-cols justify-center bg-gray-200 p-8 ml-12 pb-12">
-        <div
-          className="w-[100vh] h-[100%] flex justify-center items-end relative bottom-[35%]"
-          id="barContainer"
-        >
+    <div className="xl:w-[93%] h-[79%] max-h-array flex flex-cols justify-end items-center bg-gray-200 p-8 ml-12 pb-12 max-xl:w-[91.6%] max-lg:w-[89.5%] max-md:w-[85.8%] max-sm:w-[83.2%]">
+      <div
+        className="w-[100vh] h-[50%] flex justify-end relative right-[25%] items-end max-sm:hidden max-md:right-[35%]"
+        id="barContainer"
+      >
           {
           arr.map((val, ind) => {
             return (
@@ -27,8 +27,9 @@ export default function ArrInGraph() {
             );
           })}
         </div>
+          <dialog className="w-[70vh] text-[2rem] text-center bg-gray-200 sm:hidden" open>Please rotate your device to landscape mode for a better user experience</dialog>
       </div>
-      <div className="w-[93%] h-[15%] bg-gray-200 ml-12 "></div>
+      <div className="xl:w-[93%] h-[15%] bg-gray-200 ml-12 max-xl:w-[91.6%] max-lg:w-[89.5%] max-md:w-[85.8%] max-sm:w-[83.2%]" id="extra"></div>
     </>
   );
 }

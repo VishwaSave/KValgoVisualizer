@@ -2,11 +2,12 @@ import React from "react";
 
 export default function Codesider() {
   return (
-    <div className="w-[26%] h-[18%] py-2 absolute bottom-16 right-[0px] flex justify-end">
+    <div className="w-[100%] flex justify-end max-sm:hidden">
+    <div className="w-[26rem] h-[7rem] py-2 absolute bottom-[3.5rem] justify-end flex max-h-codeSiderbottom-[2rem] max-md:bottom-[4.5rem]">
       <div
-        className="w-[83%] h-[100%] bg-green-300 mr-2 hidden"
+        className="w-[20rem] h-[100%] bg-green-300 mr-2 hidden max-h-codeSider-ins"
         id="codeContainer"
-      >
+        >
         <div className="px-2" id="br1">
           For i = 0 to indexOfLastUnsortedElement-2
           <br />
@@ -21,7 +22,7 @@ export default function Codesider() {
         </div>
       </div>
       <button
-        className="w-[59px] bg-green-300 text-[3rem] h-[100%] flex flex-cols justify-center items-center text-center"
+        className="w-[3rem] bg-green-300 text-[3rem] h-[100%] flex flex-cols justify-center items-center text-center max-h-codeSider-btn"
         onClick={(e) => {
           if (e.currentTarget.innerText === "<") {
             e.currentTarget.innerText = ">";
@@ -32,9 +33,10 @@ export default function Codesider() {
           }
         }}
         id="cdbtn"
-      >
+        >
         {"<"}
       </button>
     </div>
+        </div>
   );
 }

@@ -46,7 +46,7 @@ export default function Radix(props) {
       msg.text = "Firstly create 10 buckets or queues for each digit (0 to 9)";
       speech.speak(msg);
       document.getElementById("buckets").innerHTML += `
-    <div class="flex flex-col items-center text-center ml-[200px]" id="bucket0"><hr class="w-[70px] h-[3px] bg-black" id="hr0"/>0</div>
+    <div class="flex flex-col items-center text-center ml-[50px]" id="bucket0"><hr class="w-[70px] h-[3px] bg-black" id="hr0"/>0</div>
     <div class="flex flex-col items-center text-center" id="bucket1"><hr class="w-[70px] h-[3px] bg-black" id="hr1"/>1</div>
     <div class="flex flex-col items-center text-center" id="bucket2"><hr class="w-[70px] h-[3px] bg-black" id="hr2"/>2</div>
     <div class="flex flex-col items-center text-center" id="bucket3"><hr class="w-[70px] h-[3px] bg-black" id="hr3"/>3</div>
@@ -198,7 +198,7 @@ export default function Radix(props) {
                 let h = g.children[q].children[j].getBoundingClientRect();
                 g.children[q].children[j].style.transform = `translate(${
                   z.left - h.x + 4
-                }px,-342px)`;
+                }px,${(z.top-h.y)+6}px)`;
                 await new Promise((res) => {
                   setTimeout(res, 100);
                 });
@@ -263,14 +263,12 @@ export default function Radix(props) {
   return (
     <arrContext.Provider value={{ array: arr }}>
       <div className="w-[100vw] h-[100vh] bg-gray-900">
-        <br />
-        <br />
         <ArrInGraph />
         <Codesider />
         <Text />
-        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex">
+        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex max-h-option">
           <button
-            className="bg-yellow-600 w-12 h-[100%] text-[3rem]"
+            className="bg-yellow-600 w-12 h-[100%] text-[3rem] max-h-option-button"
             onClick={(e) => {
               if (e.currentTarget.innerText == ">") {
                 e.currentTarget.innerText = "<";
@@ -287,9 +285,9 @@ export default function Radix(props) {
           >
             {"<"}
           </button>
-          <div className="w-[175px] bg-gray-300 ml-2" id="sort">
+          <div className="w-[175px] bg-gray-300 ml-2 max-h-option-subOption text-lg" id="sort">
             <button
-              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
                 let m = document.getElementById("newArrContainer");
                 if (m.classList.contains("hidden") === true) {
@@ -304,7 +302,7 @@ export default function Radix(props) {
               Create new Array
             </button>
             <button
-              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center text-lg"
+              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center max-h-sort"
               onClick={(e) => {
                 document.getElementById("stbtn").innerText = ">";
                 document.getElementById("sort").classList.add("hidden");
@@ -340,7 +338,7 @@ export default function Radix(props) {
             </button>
           </div>
           <div
-            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden"
+            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
             id="newArrContainer"
           >
             <button
@@ -357,7 +355,7 @@ export default function Radix(props) {
                 let o = document.getElementById("barContainer");
                 o.innerHTML = ``;
                 array.map((val, ind) => {
-                  o.innerHTML += `<div class="w-[50px] h-[30px] m-1 text-center border-2 border-black" id=${
+                  o.innerHTML += `<div class="w-[50px] py-[1.5px] m-1 text-center border-2 border-black" id=${
                     "bar" + ind
                   }>${val}</div>`;
                 });
@@ -372,11 +370,10 @@ export default function Radix(props) {
             </button>
             <form>
               <label>
-                <b className="mx-2">OR</b>A ={" "}
+                <b className="mx-2 max-h-newArr-b">OR</b>A ={" "}
               </label>
               <input
-                type="text"
-                className="mr-2"
+                className="mr-2 max-h-newArr-input"
                 defaultValue={arr}
                 id="newArray"
               />
@@ -392,7 +389,7 @@ export default function Radix(props) {
                     o.innerHTML = ``;
                     n.map((val, ind) => {
                       if (val <= 9999) {
-                        o.innerHTML += `<div class="w-[50px] h-[30px] m-1 text-center border-2 border-black" id=${
+                        o.innerHTML += `<div class="w-[50px] py-[1.5px] m-1 text-center border-2 border-black" id=${
                           "bar" + ind
                         }>${val}</div>`;
                       } else alert("value above 100 are not allowed");
@@ -404,7 +401,7 @@ export default function Radix(props) {
                     );
                   } else {
                     alert(
-                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 4 digits or less and comma (,)"
+                      "!! Invalid list !! Please provide a valid list which consist of only numbers of 4 digits or less and comma (,) and upto 20 elements/numbers are allowed"
                     );
                   }
                 }}
