@@ -4,7 +4,9 @@ import { defaultarr } from "./array";
 import ArrInGraph from "./ArrayInGraph";
 import Codesider from "./codesider";
 import Text from "./text";
-import Footer, { msg } from "../../Footer";
+import { msg } from "../../Footer";
+import play from "../../../img&other/play.png";
+import pause from "../../../img&other/pause.png";
 
 export const arrContext = createContext([]);
 
@@ -266,7 +268,7 @@ export default function Quick(props) {
       document.getElementById("br6"),
       document.getElementById("br7"),
     ];
-    if (!(arr.length==1)) {
+    if (!(arr.length == 1)) {
       await quickSort(temparr, 0, temparr.length - 1);
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       txt = "List is sorted!";
@@ -276,19 +278,6 @@ export default function Quick(props) {
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
-    document.getElementById("stbtn").disabled = false;
-    document.getElementById(
-      "navbarContainer"
-    ).children[0].children[0].children[0].disabled = false;
-    for (
-      let i = 1;
-      i < document.getElementById("navbarContainer").children.length;
-      i++
-    ) {
-      document.getElementById("navbarContainer").children[
-        i
-      ].children[0].disabled = false;
-    }
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -298,13 +287,13 @@ export default function Quick(props) {
 
   return (
     <arrContext.Provider value={{ array: arr }}>
-      <div className="w-[100vw] h-[100vh] bg-gray-900">
+      <div className="w-[100%] h-[87vh] bg-gray-900" id="main">
         <ArrInGraph />
         <Codesider />
         <Text />
-        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex max-h-option">
+        <div className="w-[57rem] absolute bottom-[5rem] h-[7rem] flex max-h-option max-sm:hidden">
           <button
-            className="bg-yellow-600 w-12 h-[100%] text-[3rem] max-h-option-button"
+            className="bg-yellow-600 w-[3rem] h-[100%] text-[3rem] max-h-option-button"
             onClick={(e) => {
               if (e.currentTarget.innerText == ">") {
                 e.currentTarget.innerText = "<";
@@ -321,7 +310,10 @@ export default function Quick(props) {
           >
             {"<"}
           </button>
-          <div className="w-[175px] bg-gray-300 ml-2 max-h-option-subOption text-lg" id="sort">
+          <div
+            className="w-[10rem] bg-gray-300 ml-[0.5rem] max-h-option-subOption text-lg"
+            id="sort"
+          >
             <button
               className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
@@ -338,7 +330,7 @@ export default function Quick(props) {
               Create new Array
             </button>
             <button
-              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center max-h-sort"
+              className="w-[100%] h-10 mt-1 bg-yellow-600 text-center max-h-sort"
               onClick={(e) => {
                 document.getElementById("stbtn").innerText = ">";
                 document.getElementById("sort").classList.add("hidden");
@@ -353,20 +345,9 @@ export default function Quick(props) {
                 document
                   .getElementById("newArrContainer")
                   .classList.add("hidden");
-                document.getElementById("stbtn").disabled = true;
-                document.getElementById(
-                  "navbarContainer"
-                ).children[0].children[0].children[0].disabled = true;
-                for (
-                  let i = 1;
-                  i <
-                  document.getElementById("navbarContainer").children.length;
-                  i++
-                ) {
-                  document.getElementById("navbarContainer").children[
-                    i
-                  ].children[0].disabled = true;
-                }
+                speech.cancel();
+                document.getElementById("ppcont").disabled = false;
+                document.getElementById("play/pause").src = pause;
                 sorting();
               }}
             >
@@ -374,13 +355,15 @@ export default function Quick(props) {
             </button>
           </div>
           <div
-            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
+            className="w-[25rem] ml-[0.5rem] pl-[0.5rem] mt-4 h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
             id="newArrContainer"
           >
             <button
-              className="bg-green-700 px-2"
+              className="bg-green-700 px-[0.5rem]"
               onClick={(e) => {
                 e.preventDefault();
+                speech.cancel();
+                document.getElementById("play/pause").src = play;
                 let array = [];
                 let i,
                   a = parseInt(Math.random() * 10);
@@ -391,7 +374,7 @@ export default function Quick(props) {
                 let o = document.getElementById("barContainer");
                 o.innerHTML = ``;
                 array.map((val, ind) => {
-                  o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
+                  o.innerHTML += `<div class="w-[3rem] relative bg-blue-300 m-[0.2rem] text-center" id=${
                     "bar" + ind
                   }><span class="relative bottom-6">${val}</span></div>`;
                   document.getElementById("bar" + ind).style.height = val + "%";
@@ -407,18 +390,20 @@ export default function Quick(props) {
             </button>
             <form>
               <label>
-                <b className="mx-2 max-h-newArr-b">OR</b>A ={" "}
+                <b className="mx-[0.5rem] max-h-newArr-b">OR</b>A ={" "}
               </label>
               <input
                 type="text"
-                className="mr-2 max-h-newArr-input"
+                className="mr-[0.5rem] max-h-newArr-input"
                 defaultValue={arr}
                 id="newArray"
               />
               <button
-                className="bg-green-700 px-2"
+                className="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
+                  speech.cancel();
+                  document.getElementById("play/pause").src = play;
                   let m = document.getElementById("newArray");
                   let regex = /^\d{1,2}(,\d{1,2})*$/;
                   if (regex.test(m.value)) {
@@ -426,11 +411,11 @@ export default function Quick(props) {
                     let o = document.getElementById("barContainer");
                     o.innerHTML = ``;
                     n.map((val, ind) => {
-                        o.innerHTML += `<div class="w-[7%] bg-blue-300 m-1 text-center" id=${
-                          "bar" + ind
-                        }><span class="relative bottom-6">${val}</span></div>`;
-                        document.getElementById("bar" + ind).style.height =
-                          val + "%";
+                      o.innerHTML += `<div class="w-[3rem] bg-blue-300 m-[0.2rem] text-center" id=${
+                        "bar" + ind
+                      }><span class="relative bottom-6">${val}</span></div>`;
+                      document.getElementById("bar" + ind).style.height =
+                        val + "%";
                     });
                     newArr(
                       n.map((val, ind) => {

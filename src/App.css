@@ -58,7 +58,7 @@ html {
         height: 73%;
     }
 }
-@media (max-height: 192px) {  
+@media (max-height: 265px) {  
     .hori{
         display: block;
     } 
@@ -68,6 +68,18 @@ html {
     }
 
     .max-h-array-ins{
+        display: none;
+    }
+
+    .max-h-option{
+        display: none;
+    }
+
+    .max-h-textContainer{
+        display: none;
+    }
+
+    .max-h-codeSider{
         display: none;
     }
 

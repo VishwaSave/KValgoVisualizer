@@ -7,16 +7,16 @@ export default function ArrInGraph() {
   const [arr, newArr] = useState(arrdetail.array);
   return (
     <>
-    <div className="xl:w-[93%] h-[79%] max-h-array flex flex-cols justify-center items-center bg-gray-200 p-8 ml-12 pb-12 max-xl:w-[91.6%] max-lg:w-[89.5%] max-md:w-[85.8%] max-sm:w-[83.2%]">
+    <div className="h-[79%] max-h-array flex flex-cols justify-center items-center bg-gray-200 pr-[2rem] mx-[3rem] pb-12 max-h-array">
       <div
-        className="w-[100vh] h-[50%] flex justify-center items-end max-sm:hidden"
+        className="w-[50%] h-[10rem] flex justify-center items-end max-sm:hidden max-h-array-ins"
         id="barContainer"
       >
-          {
-          arr.map((val, ind) => {
-            return (
-              <div
-                className="w-[7%] bg-blue-300 m-1 text-center"
+        {
+        arr.map((val, ind) => {
+          return (
+            <div
+              className="w-[3rem] bg-blue-300 m-[0.2rem] text-center"
                 style={{
                   height: val + "%",
                 }}
@@ -27,9 +27,10 @@ export default function ArrInGraph() {
             );
           })}
         </div>
-          <dialog className="w-[70vh] text-[2rem] text-center bg-gray-200 sm:hidden" open>Please rotate your device to landscape mode for a better user experience</dialog>
+          <dialog className="w-[90%] text-[10rem] ml-[4rem] text-center bg-gray-200 sm:hidden vert" open>Please rotate your device to landscape mode for a better user experience</dialog>
+          <dialog className="w-[90%] text-[12px] ml-[4rem] text-center bg-gray-200 hidden hori" open>This site can't be run on this device please try another device</dialog>
       </div>
-      <div className="xl:w-[93%] h-[15%] bg-gray-200 ml-12 max-xl:w-[91.6%] max-lg:w-[89.5%] max-md:w-[85.8%] max-sm:w-[83.2%]"></div>
+      <div className="h-[19%] bg-gray-200 mx-[3rem]" id="extra"></div>
     </>
   );
 }

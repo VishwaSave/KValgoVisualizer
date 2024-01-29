@@ -4,7 +4,9 @@ import { defaultarr } from "./array";
 import ArrInGraph from "./ArrayInGraph";
 import Codesider from "./codesider";
 import Text from "./text";
-import Footer, { msg } from "../../Footer";
+import { msg } from "../../Footer";
+import play from "../../../img&other/play.png";
+import pause from "../../../img&other/pause.png";
 
 export const arrContext = createContext([]);
 
@@ -38,9 +40,10 @@ export default function Insertion(props) {
       document.getElementById("br4"),
       document.getElementById("br5"),
     ];
-    let sorted, unsorted;
-    let ex=document.getElementById("extra").getBoundingClientRect(),h
-    if (!(arr.length==1)) {
+    let sorted, unsorted,movpos;
+    let ex = document.getElementById("extra").getBoundingClientRect(),
+      h;
+    if (!(arr.length == 1)) {
       for (j = 0; j < arr.length - 1; j++) {
         sorted = j;
         for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
@@ -67,8 +70,9 @@ export default function Insertion(props) {
           b[1].classList.add("bg-gray-700");
           a[i].classList.remove("bg-green-600");
           a[i].classList.add("bg-red-600");
-          h=a[i].getBoundingClientRect()
-          a[i].style.transform = `translateY(${(ex.bottom-h.bottom)-7}px)`;
+          h = a[i].getBoundingClientRect();
+          movpos=ex.bottom - h.bottom - 7;
+          a[i].style.transform = `translateY(${ex.bottom - h.bottom - 7}px)`;
           await new Promise((resolve) => {
             msg.addEventListener("end", () => {
               resolve();
@@ -119,8 +123,9 @@ export default function Insertion(props) {
               a[unsorted].classList.remove("bg-red-600");
               a[unsorted].classList.add("bg-green-600");
               a[l].style.transform = "translate(57px,0px)";
-              h=a[unsorted].getBoundingClientRect()
-              a[unsorted].style.transform = `translate(-57px,${(ex.bottom-h.bottom)-7}px)`;
+              a[unsorted].style.transform = `translate(-57px,${
+                movpos
+              }px)`;
               await new Promise((res) => {
                 setTimeout(res, 3000);
               });
@@ -132,8 +137,10 @@ export default function Insertion(props) {
               let temp1 = a[l].children[0].innerText;
               a[l].children[0].innerText = a[unsorted].children[0].innerText;
               a[unsorted].children[0].innerText = temp1;
-              h=a[l].getBoundingClientRect()
-              a[l].style.transform = `translate(0px,${(ex.bottom-h.bottom)-7}px)`;
+              h = a[l].getBoundingClientRect();
+              a[l].style.transform = `translate(0px,${
+                ex.bottom - h.bottom - 7
+              }px)`;
               a[unsorted].style.transform = "translate(0px,0px)";
               await new Promise((res) => {
                 setTimeout(res, 100);
@@ -196,19 +203,6 @@ export default function Insertion(props) {
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
-    document.getElementById("stbtn").disabled = false;
-    document.getElementById(
-      "navbarContainer"
-    ).children[0].children[0].children[0].disabled = false;
-    for (
-      let i = 1;
-      i < document.getElementById("navbarContainer").children.length;
-      i++
-    ) {
-      document.getElementById("navbarContainer").children[
-        i
-      ].children[0].disabled = false;
-    }
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -219,13 +213,13 @@ export default function Insertion(props) {
 
   return (
     <arrContext.Provider value={{ array: arr }}>
-      <div className="w-[100vw] h-[100vh] bg-gray-900">
+      <div className="w-[100%] h-[87vh] bg-gray-900" id="main">
         <ArrInGraph />
         <Codesider />
         <Text />
-        <div className="w-[60%] absolute bottom-[10%] h-[17%] flex max-h-option">
+        <div className="w-[57rem] absolute bottom-[5rem] h-[7rem] flex max-h-option max-sm:hidden">
           <button
-            className="bg-yellow-600 w-12 h-[100%] text-[3rem] max-h-option-button"
+            className="bg-yellow-600 w-[3rem] h-[100%] text-[3rem] max-h-option-button"
             onClick={(e) => {
               if (e.currentTarget.innerText == ">") {
                 e.currentTarget.innerText = "<";
@@ -242,7 +236,10 @@ export default function Insertion(props) {
           >
             {"<"}
           </button>
-          <div className="w-[175px] bg-gray-300 ml-2 max-h-option-subOption text-lg" id="sort">
+          <div
+            className="w-[10rem] bg-gray-300 ml-[0.5rem] max-h-option-subOption text-lg"
+            id="sort"
+          >
             <button
               className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
@@ -259,7 +256,7 @@ export default function Insertion(props) {
               Create new Array
             </button>
             <button
-              className="w-[100%] h-10 mt-2 bg-yellow-600 text-center max-h-sort"
+              className="w-[100%] h-10 mt-1 bg-yellow-600 text-center max-h-sort"
               onClick={(e) => {
                 document.getElementById("stbtn").innerText = ">";
                 document.getElementById("sort").classList.add("hidden");
@@ -274,20 +271,9 @@ export default function Insertion(props) {
                 document
                   .getElementById("newArrContainer")
                   .classList.add("hidden");
-                document.getElementById("stbtn").disabled = true;
-                document.getElementById(
-                  "navbarContainer"
-                ).children[0].children[0].children[0].disabled = true;
-                for (
-                  let i = 1;
-                  i <
-                  document.getElementById("navbarContainer").children.length;
-                  i++
-                ) {
-                  document.getElementById("navbarContainer").children[
-                    i
-                  ].children[0].disabled = true;
-                }
+                speech.cancel();
+                document.getElementById("ppcont").disabled = false;
+                document.getElementById("play/pause").src = pause;
                 sorting();
               }}
             >
@@ -295,13 +281,15 @@ export default function Insertion(props) {
             </button>
           </div>
           <div
-            className="w-[42%] ml-2 pl-2 mt-[20px] h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
+            className="w-[25rem] ml-[0.5rem] pl-[0.5rem] mt-4 h-8 bg-yellow-300 flex items-center hidden max-h-newArr-ins"
             id="newArrContainer"
           >
             <button
-              className="bg-green-700 px-2"
+              className="bg-green-700 px-[0.5rem]"
               onClick={(e) => {
                 e.preventDefault();
+                speech.cancel();
+                document.getElementById("play/pause").src = play;
                 let array = [];
                 let i,
                   a = parseInt(Math.random() * 10);
@@ -312,7 +300,7 @@ export default function Insertion(props) {
                 let o = document.getElementById("barContainer");
                 o.innerHTML = ``;
                 array.map((val, ind) => {
-                  o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
+                  o.innerHTML += `<div class="w-[3rem] relative bg-blue-300 m-[0.2rem] text-center" id=${
                     "bar" + ind
                   }><span class="relative bottom-6">${val}</span></div>`;
                   document.getElementById("bar" + ind).style.height = val + "%";
@@ -328,31 +316,33 @@ export default function Insertion(props) {
             </button>
             <form>
               <label>
-                <b className="mx-2 max-h-newArr-b">OR</b>A ={" "}
+                <b className="mx-[0.5rem] max-h-newArr-b">OR</b>A ={" "}
               </label>
               <input
                 type="text"
-                className="mr-2 max-h-newArr-input"
+                className="mr-[0.5rem] max-h-newArr-input"
                 defaultValue={arr}
                 id="newArray"
               />
               <button
-                className="bg-green-700 px-2"
+                className="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
+                  speech.cancel();
+                  document.getElementById("play/pause").src = play;
                   let m = document.getElementById("newArray");
-                  let regex=/^(?:[1-9]\d?|50)(?:,(?:[1-9]\d?|50)){0,9}$/
+                  let regex = /^(?:[0-9]\d?|50)(?:,(?:[0-9]\d?|50)){0,9}$/;
 
                   if (regex.test(m.value)) {
                     let n = m.value.split(",");
                     let o = document.getElementById("barContainer");
                     o.innerHTML = ``;
                     n.map((val, ind) => {
-                        o.innerHTML += `<div class="w-[7%] relative bg-blue-300 m-1 text-center" id=${
-                          "bar" + ind
-                        }><span class="relative bottom-6">${val}</span></div>`;
-                        document.getElementById("bar" + ind).style.height =
-                          val + "%";
+                      o.innerHTML += `<div class="w-[3rem] bg-blue-300 m-[0.2rem] text-center" id=${
+                        "bar" + ind
+                      }><span class="relative bottom-6">${val}</span></div>`;
+                      document.getElementById("bar" + ind).style.height =
+                        val + "%";
                     });
                     newArr(
                       n.map((val, ind) => {

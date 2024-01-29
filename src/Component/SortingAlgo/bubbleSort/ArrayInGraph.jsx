@@ -30,7 +30,7 @@ export default function ArrInGraph() {
           <dialog className="w-[90%] text-[10rem] ml-[4rem] text-center bg-gray-200 sm:hidden vert" open>Please rotate your device to landscape mode for a better user experience</dialog>
           <dialog className="w-[90%] text-[12px] ml-[4rem] text-center bg-gray-200 hidden hori" open>This site can't be run on this device please try another device</dialog>
       </div>
-      <div className="h-[15%] bg-gray-200 mx-[3rem]" id="extra"></div>
+      <div className="h-[19%] bg-gray-200 mx-[3rem]" id="extra"></div>
     </>
   );
 }

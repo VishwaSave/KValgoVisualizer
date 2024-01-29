@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import pause from "../img&other/pause.png"
 import play from "../img&other/play.png"
+import mute from "../img&other/mute.png"
+import high from "../img&other/high.png"
 
 export const msg = new SpeechSynthesisUtterance();
 export default function Footer() {
@@ -10,10 +12,10 @@ export default function Footer() {
     document.getElementById('ppcont').disabled=true;
   },[])
   return (
-    <div className="w-[90%] relative xl:bottom-8 left-4 text-white text-lg flex max-h-footer max-sm:hidden xl:text-[1rem] lg:text-[1.2rem] lg:bottom-10 sm:text-[1.9rem] sm:bottom-12">
+    <div className="w-[100vw] h-[25px] bg-gray-900 left-4 text-white text-lg flex max-h-footer max-sm:hidden xl:text-[1rem] lg:text-[1.2rem] sm:text-[1.9rem]">
       Select voice:
       <select
-        className="bg-gray-600 relative text-white cursor-pointer appearance-none px-2 scroll-smooth outline-none ml-2 text-[1rem] max-h-footer-select xl:text-[1rem] lg:text-[1.2rem] md:bottom-0 sm:text-[1.7rem] sm:bottom-2"
+        className="bg-gray-600 text-white cursor-pointer appearance-none px-2 scroll-smooth outline-none ml-2 text-[1rem] max-h-footer-select xl:text-[1rem] lg:text-[1.2rem] sm:text-[1.7rem]"
         id="selectVoice"
         onClick={(e) => {
           voices.map((val) => {
@@ -39,7 +41,7 @@ export default function Footer() {
         Speed:
         <form>
           <input
-            className="ml-2 cursor-grab transition-all duration-[3s] max-h-footer-ratio relative xl:top-[1.8px] lg:top-[1.3px] lg:bottom-0 sm:bottom-[1.5px]"
+            className="ml-2 cursor-grab transition-all duration-[3s] max-h-footer-ratio relative xl:top-[1.8px] lg:top-[1.3px]"
             type="range"
             min="0"
             max="6"
@@ -64,12 +66,25 @@ export default function Footer() {
               }
             }}
           />
-          <label className="ml-2 relative xl:text-[1rem] lg:text-[1.2rem] lg:bottom-[1.3px] md:bottom-2 sm:text-[2rem] sm:bottom-4" id="rangeValue">
+          <label className="ml-2 xl:text-[1rem] lg:text-[1.2rem] sm:text-[2rem]" id="rangeValue">
             1X
           </label>
         </form>
       </div>
-      <div className="ml-4 flex">
+      <div className="ml-12 flex">
+        <button onClick={(e)=>{
+          const m=document.getElementById('volumeimg')
+          if(m.src==mute){
+            msg.volume=1;
+            m.src=high;
+          }
+          else{
+            msg.volume=0;
+            m.src=mute;
+          }
+        }}><img src={high} className="w-[1.6rem] max-lg:w-[2.3rem] max-md:w-[2.5rem]" alt='sorry' id='volumeimg'/></button>
+      </div>
+      <div className="ml-28 flex">
         <button onClick={(e)=>{
           const m=document.getElementById('play/pause')
           if(m.src==pause){
@@ -80,7 +95,7 @@ export default function Footer() {
             speech.resume();
             m.src=pause;
           }
-        }} id='ppcont'><img src={play} className="w-[25px]" alt='sorry' id='play/pause'/></button>
+        }} id='ppcont'><img src={play} className="w-[1.6rem] max-lg:w-[2.3rem] max-md:w-[2.5rem]" alt='sorry' id='play/pause'/></button>
       </div>
     </div>
   );

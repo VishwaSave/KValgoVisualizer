@@ -4,9 +4,9 @@ import { defaultarr } from "./array";
 import ArrInGraph from "./ArrayInGraph";
 import Codesider from "./codesider";
 import Text from "./text";
-import Footer, { msg } from "../../Footer";
-import play from "../../../img&other/play.png"
-import pause from "../../../img&other/pause.png"
+import { msg } from "../../Footer";
+import play from "../../../img&other/play.png";
+import pause from "../../../img&other/pause.png";
 
 export const arrContext = createContext([]);
 
@@ -38,7 +38,7 @@ export default function Bubble(props) {
       document.getElementById("br2"),
       document.getElementById("br3"),
     ];
-    if (!(arr.length==1)) {
+    if (!(arr.length == 1)) {
       for (j = 0; j < arr.length - 1; j++) {
         for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
         if (j === 0) {
@@ -167,19 +167,6 @@ export default function Bubble(props) {
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
-    document.getElementById("stbtn").disabled = false;
-    document.getElementById(
-      "navbarContainer"
-    ).children[0].children[0].children[0].disabled = false;
-    for (
-      let i = 1;
-      i < document.getElementById("navbarContainer").children.length;
-      i++
-    ) {
-      document.getElementById("navbarContainer").children[
-        i
-      ].children[0].disabled = false;
-    }
     arr.map((val, ind) => {
       a[ind].classList.remove("bg-green-600");
       a[ind].classList.remove("bg-red-600");
@@ -194,7 +181,7 @@ export default function Bubble(props) {
 
   return (
     <arrContext.Provider value={{ array: arr }}>
-      <div className="w-[100%] h-[100vh] bg-gray-900" id="main">
+      <div className="w-[100%] h-[87vh] bg-gray-900" id="main">
         <ArrInGraph />
         <Codesider />
         <Text />
@@ -217,7 +204,10 @@ export default function Bubble(props) {
           >
             {"<"}
           </button>
-          <div className="w-[10rem] bg-gray-300 ml-[0.5rem] max-h-option-subOption text-lg" id="sort">
+          <div
+            className="w-[10rem] bg-gray-300 ml-[0.5rem] max-h-option-subOption text-lg"
+            id="sort"
+          >
             <button
               className="w-[100%] h-10 mt-4 bg-yellow-600 text-center max-h-newArr"
               onClick={(e) => {
@@ -249,9 +239,9 @@ export default function Bubble(props) {
                 document
                   .getElementById("newArrContainer")
                   .classList.add("hidden");
-                  speech.cancel();
-                document.getElementById('ppcont').disabled=false
-                document.getElementById('play/pause').src=pause;
+                speech.cancel();
+                document.getElementById("ppcont").disabled = false;
+                document.getElementById("play/pause").src = pause;
                 sorting();
               }}
             >
@@ -267,7 +257,7 @@ export default function Bubble(props) {
               onClick={(e) => {
                 e.preventDefault();
                 speech.cancel();
-                document.getElementById('play/pause').src=play;
+                document.getElementById("play/pause").src = play;
                 let array = [];
                 let i,
                   a = parseInt(Math.random() * 10);
@@ -307,7 +297,7 @@ export default function Bubble(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   speech.cancel();
-                  document.getElementById('play/pause').src=play;
+                  document.getElementById("play/pause").src = play;
                   let m = document.getElementById("newArray");
                   let regex = /^(?:\d{1,2},){0,19}\d{1,2}$/;
 
