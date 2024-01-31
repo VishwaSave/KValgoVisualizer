@@ -7,8 +7,8 @@ export default function ArrInGraph() {
   const [arr, newArr] = useState(arrdetail.array);
   return (
     <>
-      <div className="w-[100%] h-[73%]" id="disContainer">
-      <div className="max-h-array h-[55.3%] flex justify-center bg-gray-200 pr-[2rem] mx-[3rem]">
+      <div className="w-[100%] h-[73%] max-lg:text-[1.5rem]" id="disContainer">
+      <div className="h-[55.3%] flex justify-center bg-gray-200 pr-[2rem] mx-[3rem]">
         <div
           className="w-[50%] h-[2rem] flex ml-[15%] mt-20 max-sm:hidden max-h-array-ins"
           id="barContainer"
@@ -16,7 +16,7 @@ export default function ArrInGraph() {
             {arr.map((val, ind) => {
               return (
                 <div
-                  className="w-[3rem] m-[0.2rem] h-[2rem] text-center border-2 border-black"
+                  className="w-[3rem] max-lg:w-[5rem] m-[0.2rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-2 border-black"
                   id={"bar" + ind}
                 >
                   {val}
@@ -26,7 +26,7 @@ export default function ArrInGraph() {
           </div>
         </div>
         <div
-          className="max-h-array h-[79%] flex items-end pr-[2rem] mx-[3rem] pb-12 bg-gray-200 gap-x-[15px] transition transition-all ease-in-out duration-200 "
+          className="h-[79%] flex items-end pr-[2rem] mx-[3rem] pb-12 bg-gray-200 gap-x-[15px] transition transition-all ease-in-out duration-200 "
           id="buckets"
         ></div>
         <dialog className="w-[90%] text-[10rem] ml-[4rem] text-center bg-gray-200 sm:hidden vert" open>Please rotate your device to landscape mode for a better user experience</dialog>

@@ -21,6 +21,7 @@ export default function Radix(props) {
     arr.map((val, ind) => {
       a.push(document.getElementById("bar" + ind));
       a[ind].style.transition = "all 2s ease-out";
+      a[ind].style.height="1rem"
     });
   }, [arr]);
 
@@ -48,16 +49,16 @@ export default function Radix(props) {
       msg.text = "Firstly create 10 buckets or queues for each digit (0 to 9)";
       speech.speak(msg);
       document.getElementById("buckets").innerHTML += `
-    <div class="flex flex-col items-center text-center ml-[50px]" id="bucket0"><hr class="w-[4rem] h-[3px] bg-black" id="hr0"/>0</div>
-    <div class="flex flex-col items-center text-center" id="bucket1"><hr class="w-[4rem] h-[3px] bg-black" id="hr1"/>1</div>
-    <div class="flex flex-col items-center text-center" id="bucket2"><hr class="w-[4rem] h-[3px] bg-black" id="hr2"/>2</div>
-    <div class="flex flex-col items-center text-center" id="bucket3"><hr class="w-[4rem] h-[3px] bg-black" id="hr3"/>3</div>
-    <div class="flex flex-col items-center text-center" id="bucket4"><hr class="w-[4rem] h-[3px] bg-black" id="hr4"/>4</div>
-    <div class="flex flex-col items-center text-center" id="bucket5"><hr class="w-[4rem] h-[3px] bg-black" id="hr5"/>5</div>
-    <div class="flex flex-col items-center text-center" id="bucket6"><hr class="w-[4rem] h-[3px] bg-black" id="hr6"/>6</div>
-    <div class="flex flex-col items-center text-center" id="bucket7"><hr class="w-[4rem] h-[3px] bg-black" id="hr7"/>7</div>
-    <div class="flex flex-col items-center text-center" id="bucket8"><hr class="w-[4rem] h-[3px] bg-black" id="hr8"/>8</div>
-    <div class="flex flex-col items-center text-center" id="bucket9"><hr class="w-[4rem] h-[3px] bg-black" id="hr9"/>9</div>`;
+    <div class="flex flex-col items-center text-center ml-[2rem]" id="bucket0"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr0"/>0</div>
+    <div class="flex flex-col items-center text-center" id="bucket1"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr1"/>1</div>
+    <div class="flex flex-col items-center text-center" id="bucket2"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr2"/>2</div>
+    <div class="flex flex-col items-center text-center" id="bucket3"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr3"/>3</div>
+    <div class="flex flex-col items-center text-center" id="bucket4"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr4"/>4</div>
+    <div class="flex flex-col items-center text-center" id="bucket5"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr5"/>5</div>
+    <div class="flex flex-col items-center text-center" id="bucket6"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr6"/>6</div>
+    <div class="flex flex-col items-center text-center" id="bucket7"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr7"/>7</div>
+    <div class="flex flex-col items-center text-center" id="bucket8"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr8"/>8</div>
+    <div class="flex flex-col items-center text-center" id="bucket9"><hr class="w-[4rem] max-lg:w-[5rem] h-[3px] bg-black" id="hr9"/>9</div>`;
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
@@ -106,7 +107,6 @@ export default function Radix(props) {
           const placeholderDiv = document.createElement("div");
           placeholderDiv.classList.add(
             "w-[3rem]",
-            "h-[2rem]",
             "m-[0.2rem]",
             "border-2"
           );
@@ -122,10 +122,11 @@ export default function Radix(props) {
           let h = a[j].getBoundingClientRect();
           if (g.children[digit].children.length == 1) {
             a[j].style.transform = `translate(${z.x - h.x + 8}px,${
-              z.y - 120
+              z.y - h.y - 30
             }px)`;
           } else {
-            a[j].style.transform = `translate(${z.x - h.x}px,${z.y - 122}px)`;
+            a[j].style.transform = `translate(${z.x - h.x}px,${
+              z.y - h.y - 32}px)`;
           }
           await new Promise((resolve) => {
             msg.addEventListener("end", () => {
@@ -321,7 +322,7 @@ export default function Radix(props) {
                 let o = document.getElementById("barContainer");
                 o.innerHTML = ``;
                 array.map((val, ind) => {
-                  o.innerHTML += `<div class="w-[3rem] h-[2rem] m-1 text-center border-2 border-black" id=${
+                  o.innerHTML += `<div class="w-[3rem] max-lg:w-[4.5rem] m-[0.2rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-2 border-black" id=${
                     "bar" + ind
                   }>${val}</div>`;
                 });
@@ -356,7 +357,7 @@ export default function Radix(props) {
                     let o = document.getElementById("barContainer");
                     o.innerHTML = ``;
                     n.map((val, ind) => {
-                      o.innerHTML += `<div class="w-[3rem] h-[2rem] m-1 text-center border-2 border-black" id=${
+                      o.innerHTML += `<div class="w-[3rem] max-lg:w-[4.5rem] m-[0.2rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-2 border-black" id=${
                         "bar" + ind
                       }>${val}</div>`;
                     });
