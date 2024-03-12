@@ -6,7 +6,7 @@ import LinkedListVisualizer from "./Component/LinkedList/LinkedList";
 import BST from "./Component/BST/bst";
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/visualize">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sorting-algorithms" element={<Sorting />} />
