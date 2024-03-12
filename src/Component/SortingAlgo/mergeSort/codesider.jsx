@@ -5,7 +5,7 @@ export default function Codesider() {
     <div className="w-[100%] flex justify-end max-sm:hidden">
       <div className="w-[26rem] h-[12rem] py-2 absolute bottom-[3.5rem] justify-end flex max-h-codeSider max-md:bottom-[4.5rem]">
         <div
-          className="w-[21rem] h-[100%] bg-green-300 mr-2 hidden max-h-codeSider-ins"
+          className="w-[21rem] h-[100%] bg-green-300 mr-2 hidden max-h-codeSider-ins text-[0.93rem]"
           id="codeContainer"
         >
         <div className="px-2" id="br1">

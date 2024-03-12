@@ -1,14 +1,14 @@
 import React from 'react';
 import sortImg from '../img&other/sorting.gif'
 import list from '../img&other/list.gif'
-import bst from '../img&other/bst.gif'
+import array from '../img&other/array.gif'
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const algorithms = [
     { name: 'Sorting Algorithms', imag: sortImg, description: 'Visualize various sorting algorithms', next:'/sorting-algorithms'},
     { name: 'Linked List', imag: list, description: 'Explore linked list operations and algorithms', next:'/linkedlist-algorithms'},
-    { name: 'Binary Search Tree', imag: bst, description: 'Visualize operations on binary search trees', next:'/bst-algorithms'},
+    { name: 'Array', imag: array, description: 'Explore array operations and algorithms', next:'/array-algorithms'},
   ];
 
   return (

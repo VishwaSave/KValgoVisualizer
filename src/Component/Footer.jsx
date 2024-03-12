@@ -7,7 +7,7 @@ import high from "../img&other/high.png"
 export const msg = new SpeechSynthesisUtterance();
 export default function Footer() {
   let speech=window.speechSynthesis;
-  let voices = [];
+  const voices = speech.getVoices();
   useEffect(()=>{
     document.getElementById('ppcont').disabled=true;
   },[])
@@ -27,7 +27,6 @@ export default function Footer() {
       >
         {
         setTimeout(() => {
-            voices = speech.getVoices();
             voices.map((val, ind) => {
               if (ind !== 1 && ind !== 2 && ind !== 5) {
                 document.getElementById(
