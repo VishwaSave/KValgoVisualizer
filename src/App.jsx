@@ -6,14 +6,7 @@ import LinkedListVisualizer from "./Component/LinkedList/LinkedList";
 import BST from "./Component/BST/bst";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sorting-algorithms" element={<Sorting />} />
-        <Route path="/linkedlist-algorithms" element={<LinkedListVisualizer />} />
-        <Route path="/bst-algorithms" element={<BST />} />
-      </Routes>
-    </BrowserRouter>
+    <div>hii</div>
   );
 }
 
