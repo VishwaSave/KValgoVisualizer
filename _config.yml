@@ -1,0 +1,8 @@
+# Site settings
+title: KValgoVisualizer
+description: A simple Jekyll site
+url: "https://VishwaSave.github.io/KValgoVisualizer/"
+
+# Build settings
+markdown: kramdown
+theme: minima
