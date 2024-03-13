@@ -1,12 +1,16 @@
 {
   "files": {
-    "main.js": "/KValgoVisualizer/static/js/main.9aa8af8f.js",
+    "main.css": "/KValgoVisualizer/static/css/main.b8839c8e.css",
+    "main.js": "/KValgoVisualizer/static/js/main.9d01485b.js",
     "static/js/453.0a988435.chunk.js": "/KValgoVisualizer/static/js/453.0a988435.chunk.js",
+    "static/media/array.gif": "/KValgoVisualizer/static/media/array.ffdda8f364021633d0f3.gif",
     "index.html": "/KValgoVisualizer/index.html",
-    "main.9aa8af8f.js.map": "/KValgoVisualizer/static/js/main.9aa8af8f.js.map",
+    "main.b8839c8e.css.map": "/KValgoVisualizer/static/css/main.b8839c8e.css.map",
+    "main.9d01485b.js.map": "/KValgoVisualizer/static/js/main.9d01485b.js.map",
     "453.0a988435.chunk.js.map": "/KValgoVisualizer/static/js/453.0a988435.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.9aa8af8f.js"
+    "static/css/main.b8839c8e.css",
+    "static/js/main.9d01485b.js"
   ]
 }
