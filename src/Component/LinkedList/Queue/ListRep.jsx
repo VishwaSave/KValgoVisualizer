@@ -27,7 +27,7 @@ export default function ListR() {
       <div className="w-[100%] h-[73%] max-lg:text-[1.5rem]" id="disContainer">
         <div className=" h-[86vh] flex justify-center items-center bg-gray-200 pr-[2rem] mx-[3rem]">
           <div
-            className="w-[100%]  h-[2rem] flex justify-center max-sm:hidden max-h-array-ins"
+            className="w-[100%]  h-[2rem] relative bottom-[100px] flex justify-center max-sm:hidden max-h-array-ins"
             id="barContainer"
           >
             {list.map((val, ind) => {

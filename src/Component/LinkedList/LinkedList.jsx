@@ -26,7 +26,7 @@ export default function Sorting() {
     speech.cancel();
     document.getElementById('play/pause').src=play;
     let a = [...document.getElementById("navbarContainer").children];
-    let m=["SLL", "DLL", "CLL", "STACK", "QUEUE"]
+    let m=["SLL", "DLL", "STACK", "QUEUE"]
     a.map((val, ind) => {
       if (ind !== 0) {
         if (a[ind].children[0] !== e.currentTarget)
