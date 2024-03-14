@@ -36,7 +36,7 @@ export default function Sorting() {
       }
     });
     switch (e.currentTarget.innerText) {
-      case "SINGLY LINKED LIST":
+      case "DOUBLY LINKED LIST":
         newComponent(<DLL />);
         break;
 

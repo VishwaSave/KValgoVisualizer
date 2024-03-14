@@ -27,6 +27,12 @@ export default function LinkedList(props) {
         n.children[2].classList.add("hidden");
       if (!n.children[3].classList.contains("hidden"))
         n.children[3].classList.add("hidden");
+      if (!n.children[4].classList.contains("hidden"))
+        n.children[4].classList.add("hidden");
+      if (!n.children[5].classList.contains("hidden"))
+        n.children[5].classList.add("hidden");
+      if (!n.children[6].classList.contains("hidden"))
+        n.children[6].classList.add("hidden");
       document.getElementById("newList").value = list;
       if (list.length > 1) {
         let ao = document.getElementById("title0");
@@ -63,10 +69,19 @@ export default function LinkedList(props) {
           .getElementsByClassName("arrow-" + ind)[0]
           .classList.remove("bg-yellow-500");
         document
+          .getElementsByClassName("arrow-" + ind)[3]
+          .classList.remove("bg-yellow-500");
+        document
           .getElementsByClassName("arrow-" + ind)[0]
           .classList.remove("bg-green-500");
         document
+          .getElementsByClassName("arrow-" + ind)[3]
+          .classList.remove("bg-green-500");
+        document
           .getElementsByClassName("arrow-" + ind)[0]
+          .classList.remove("bg-blue-500");
+        document
+          .getElementsByClassName("arrow-" + ind)[3]
           .classList.remove("bg-blue-500");
       });
     }
@@ -254,12 +269,16 @@ export default function LinkedList(props) {
       vtx.next = head
       </div>
       <div class="px-2" id="br3">
+      if (head != null) head.prev = vtx
+      </div>
+      <div class="px-2" id="br4">
       head = vtx, tail = head
       </div>`;
       b = [
         document.getElementById("br1"),
         document.getElementById("br2"),
         document.getElementById("br3"),
+        document.getElementById("br4"),
       ];
       const newE = document.createElement("div");
       newE.style.transition = "all 3s ease-out";
@@ -297,14 +316,14 @@ export default function LinkedList(props) {
         });
       });
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
-      b[2].classList.add("bg-gray-700");
+      b[3].classList.add("bg-gray-700");
       txt = "head points to vtx.";
       c.innerText = txt;
       msg.text = txt;
       speech.speak(msg);
-      n.children[0].innerHTML = `<div><div class="flex">
+      n.children[0].innerHTML = `<div class="flex">
       <div
-      class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
+      class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-black border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
         id="bar0"
       >
         ${m}
@@ -313,8 +332,7 @@ export default function LinkedList(props) {
       <div
         class="w-[4rem] max-lg:w-[5rem] text-center text-red-700"
         id="title0"
-        ><b>head/0</b></div>
-        </div>`;
+        ><b>head/0</b></div>`;
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
@@ -324,11 +342,6 @@ export default function LinkedList(props) {
       c.innerText = txt;
       msg.text = txt;
       speech.speak(msg);
-      await new Promise((resolve) => {
-        msg.addEventListener("end", () => {
-          resolve();
-        });
-      });
       n.children[0].innerHTML = `<div class="flex">
       <div
       class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-black border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
@@ -336,26 +349,34 @@ export default function LinkedList(props) {
       >
         ${m}
       </div>
-      <div>
-        <hr
-          class="w-5 h-1 relative bg-black bg-yellow-500 top-3 transition ease-in-out duration-[3s] arrow-0"
-        />
+      <div class="relative w-5">
+      <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-0" />
       </div>
       <div class="absolute">
-      <hr
-        class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-0" />
       </div>
       <div class="absolute">
-        <hr
-        class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-0"  />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-0" />
       </div>
       </div>
       <div
         class="w-[4rem] max-lg:w-[5rem] text-center text-red-700"
         id="title0"
         ><b>head/tail/0</b></div>`;
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
     } else {
       document.getElementById("codeContainer").innerHTML = `
       <div class="px-2" id="br1">
@@ -365,18 +386,22 @@ export default function LinkedList(props) {
       vtx.next = head
       </div>
       <div class="px-2" id="br3">
+      if (head != null) head.prev = vtx
+      </div>
+      <div class="px-2" id="br4">
       head = vtx
       </div>`;
       b = [
         document.getElementById("br1"),
         document.getElementById("br2"),
         document.getElementById("br3"),
+        document.getElementById("br4"),
       ];
       n.children[0].children[1].innerHTML = `<b>head/0</b>`;
       for (let i = 0; i < list.length; i++) {
         n = document.getElementById("barContainer");
         a[i].id = "bar" + (i + 1);
-        for (let j = 1; j < 4; j++) {
+        for (let j = 1; j < 7; j++) {
           n.children[i].children[0].children[j].children[0].classList.remove(
             "arrow-" + i
           );
@@ -396,10 +421,7 @@ export default function LinkedList(props) {
       >
         ${m}
       </div>
-      <div>
-        <hr
-          class="w-5 h-1 relative top-3 transition ease-in-out duration-[3s] arrow-0"
-        />
+      <div class="relative w-5">
       </div>
       </div>
       <div
@@ -432,20 +454,14 @@ export default function LinkedList(props) {
       >
         ${m}
       </div>
-      <div>
-        <hr
-          class="w-5 h-1 relative bg-yellow-500 top-3 transition ease-in-out duration-[3s] arrow-0"
-        />
+      <div class="relative w-5">
+      <hr class="w-7 h-1 bg-black bg-yellow-500 absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-0" />
       </div>
       <div class="absolute">
-      <hr
-        class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-0" />
       </div>
       <div class="absolute">
-        <hr
-        class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-0" />
       </div>
       </div>
       <div
@@ -460,6 +476,47 @@ export default function LinkedList(props) {
       });
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[2].classList.add("bg-gray-700");
+      txt = "Current head.prev points to vtx.";
+      c.innerText = txt;
+      msg.text = txt;
+      speech.speak(msg);
+      n.children[0].innerHTML = `<div class="flex">
+      <div
+      class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-black border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
+        id="bar0"
+      >
+        ${m}
+      </div>
+      <div class="relative w-5">
+      <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-7 h-1 bg-black bg-yellow-500 relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-0"  />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-0" />
+      </div>
+      </div>
+      <div
+        class="w-[4rem] max-lg:w-[5rem] text-center text-red-700"
+        id="title0"
+        ><b>vtx</b></div>`;
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      b[3].classList.add("bg-gray-700");
       txt = "head points to vtx.";
       c.innerText = txt;
       msg.text = txt;
@@ -471,20 +528,23 @@ export default function LinkedList(props) {
       >
         ${m}
       </div>
-      <div>
-        <hr
-          class="w-5 h-1 relative bg-black top-3 transition ease-in-out duration-[3s] arrow-0"
-        />
+      <div class="relative w-5">
+      <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-0" />
       </div>
       <div class="absolute">
-      <hr
-        class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-0" />
       </div>
       <div class="absolute">
-        <hr
-        class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-0"
-        />
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-0"  />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-0" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-0" />
       </div>
       </div>
       <div
@@ -510,7 +570,7 @@ export default function LinkedList(props) {
       Vertex vtx = new Vertex(v)
       </div>
       <div class="px-2" id="br2">
-      tail.next = vtx
+      tail.next = vtx, vtx.prev = tail
       </div>
       <div class="px-2" id="br3">
       tail = vtx
@@ -555,7 +615,10 @@ export default function LinkedList(props) {
     });
     for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
     b[1].classList.add("bg-gray-700");
-    txt = "Current tail.next points to vtx.";
+    if (list.length > 0)
+      txt =
+        "Current tail.next points to vtx. vtx.prev points back to the current tail.";
+    else txt = "Current tail.next points to vtx.";
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
@@ -568,6 +631,10 @@ export default function LinkedList(props) {
       np.children[1].children[0].classList.add("bg-yellow-500");
       np.children[2].classList.remove("hidden");
       np.children[3].classList.remove("hidden");
+      np.children[4].classList.remove("hidden");
+      np.children[4].children[0].classList.add("bg-yellow-500");
+      np.children[5].classList.remove("hidden");
+      np.children[6].classList.remove("hidden");
     }
     n.children[n.children.length - 1].innerHTML = `<div><div class="flex">
       <div
@@ -600,21 +667,23 @@ export default function LinkedList(props) {
       id="bar${list.length}"
       >
       ${m}
-      </div>
-      <div>
-        <hr
-          class="w-5 h-1 relative bg-black top-3 transition ease-in-out duration-[3s] arrow-${list.length}"
-        />
+      </div><div class="relative w-5">
+      <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-${list.length}" />
       </div>
       <div class="absolute">
-      <hr
-        class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-${list.length}"
-        />
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${list.length}" />
       </div>
       <div class="absolute">
-        <hr
-        class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-${list.length}"
-        />
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-${list.length}" />
+      </div>
+      <div class="absolute">
+      <hr class="w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-${list.length}"  />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-${list.length}" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-${list.length}" />
       </div>
       </div>
       <div
@@ -623,7 +692,11 @@ export default function LinkedList(props) {
         ><b>tail/${list.length}</b></div>`;
     n.replaceChild(newE1, n.children[n.children.length - 1]);
     if (list.length > 0) {
+      np =
+        document.getElementById("barContainer").children[n.children.length - 2]
+          .children[0];
       np.children[1].children[0].classList.remove("bg-yellow-500");
+      np.children[4].children[0].classList.remove("bg-yellow-500");
       n.children[n.children.length - 2].children[1].innerHTML = "";
     }
     let nx =
@@ -632,6 +705,9 @@ export default function LinkedList(props) {
     nx.children[1].classList.add("hidden");
     nx.children[2].classList.add("hidden");
     nx.children[3].classList.add("hidden");
+    nx.children[4].classList.add("hidden");
+    nx.children[5].classList.add("hidden");
+    nx.children[6].classList.add("hidden");
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -657,10 +733,10 @@ export default function LinkedList(props) {
     Vertex vtx = new Vertex(v)
     </div>
     <div class="px-2" id="br6">
-    vtx.next = aft
+    vtx.next = aft, aft.prev = vtx
     </div>
     <div class="px-2" id="br7">
-    pre.next = vtx
+    pre.next = vtx, vtx.prev = pre
     </div>`;
     let txt,
       c = document.getElementById("textContainer"),
@@ -754,7 +830,7 @@ export default function LinkedList(props) {
     p.classList.add("text-white");
     if (m - 2 == 0)
       document.getElementById("title" + (m - 2)).innerHTML = "<b>head/0</b>";
-    if (m - 2 != 0) document.getElementById("title" + (m - 2)).innerHTML = "";
+    if (m - 2 > 0) document.getElementById("title" + (m - 2)).innerHTML = "";
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -810,23 +886,29 @@ export default function LinkedList(props) {
     });
     for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
     b[5].classList.add("bg-gray-700");
-    txt = "vtx.next points to aft.";
+    txt = "vtx.next points to aft. aft.prev points to vtx.";
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
     newE.innerHTML = `<div>
-      <div class="absolute">
-        <hr
-          class= "w-1 h-6 bg-black transition ease-in-out duration-[3s] bg-green-500 z-10 relative left-[2rem] bottom-[24px] arrow" />
-      </div>
-      <div class="absolute">
-        <hr
-          class= "w-1 h-3 bg-black relative bottom-[24.2px] left-[1.8rem] rotate-45 z-10 arrow" />
-      </div>
-      <div class="absolute">
-        <hr
-          class= "w-1 h-3 bg-black relative bottom-[24.2px] left-[2.2rem] rotate-[140deg] z-10 arrow" />
-      </div>
+    <div class="absolute">
+    <hr class="w-1 h-7 bg-black bg-yellow-500 z-10 relative left-[1.5rem] bottom-[24px] transition ease-in-out duration-[3s] arrow-" />
+    </div>
+    <div class="absolute">
+    <hr class="w-1 h-2 bg-black relative  bottom-[24.2px] left-[1.4rem] z-10 rotate-45 arrow-" />
+    </div>
+    <div class="absolute">
+    <hr class="w-1 h-2 bg-black relative  bottom-[24.2px] left-[1.6rem] z-10 rotate-[140deg] arrow-" />
+    </div>
+    <div class="absolute">
+    <hr class="w-1 h-7 bg-black bg-yellow-500 z-10 relative left-[2.5rem] bottom-[24px] z-10 transition ease-in-out duration-[3s] arrow-"  />
+    </div>
+    <div class="absolute">
+    <hr class="w-1 h-2 bg-black border-0 relative  bottom-[7px] left-[2.6rem] z-10 rotate-45 arrow-" />
+    </div>
+    <div class="absolute">
+    <hr class="w-1 h-2 bg-black border-0 relative  bottom-[7px] left-[2.4rem] rotate-[140deg] z-10 arrow-" />
+    </div>
       <div class="flex">
       <div
       class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
@@ -847,7 +929,7 @@ export default function LinkedList(props) {
     });
     for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
     b[6].classList.add("bg-gray-700");
-    txt = "pre.next points to vtx.";
+    txt = "pre.next points to vtx. vtx.prev points to pre.";
     c.innerText = txt;
     msg.text = txt;
     speech.speak(msg);
@@ -860,17 +942,23 @@ export default function LinkedList(props) {
       >
       ${m1}
       </div>
-      <div>
-        <hr
-          class= "w-5 h-1 bg-black transition ease-in-out duration-[3s] bg-green-500 z-10 relative top-3 arrow-${m}" />
+      <div class="relative w-5">
+      <hr class="w-7 h-1 bg-black bg-yellow-500 absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-${m}" />
       </div>
       <div class="absolute">
-        <hr
-          class= "w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 z-10 arrow-${m}" />
+      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${m}" />
       </div>
       <div class="absolute">
-        <hr
-          class= "w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] z-10 arrow-${m}" />
+      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-${m}" />
+      </div>
+      <div class="absolute">
+      <hr class="w-7 h-1 bg-black bg-yellow-500 relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-${m}"  />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-${m}" />
+      </div>
+      <div class="absolute">
+      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-${m}" />
       </div>
       </div>
       <div
@@ -878,14 +966,17 @@ export default function LinkedList(props) {
       id="title${m}"
       ><b>vtx</b></div>
       </div>`;
+
     let am = [];
+    ar = document.getElementsByClassName("arrow-" + (m - 1));
+    ar[3].classList.add("bg-yellow-500");
     for (k = 0; k < parseInt(m); k++) am.push(n.children[k]);
     am.push(newE);
     for (k = parseInt(m); k < list.length; k++) {
       n = document.getElementById("barContainer");
       n.children[k].children[0].children[0].id = "bar" + (k + 1);
       n.children[k].children[1].id = "title" + (k + 1);
-      for (let j = 1; j < 4; j++) {
+      for (let j = 1; j < 7; j++) {
         n.children[k].children[0].children[j].children[0].classList.remove(
           "arrow-" + k
         );
@@ -924,12 +1015,15 @@ export default function LinkedList(props) {
     <div class="px-2" id="br4">
     delete tmp
     </div>
+    <div class="px-2" id="br5">
+    if (head != null) head.prev = null
+    </div>
     `;
     b = [
       document.getElementById("br1"),
       document.getElementById("br2"),
       document.getElementById("br3"),
-      document.getElementById("br4"),
+      document.getElementById("br5"),
     ];
     if (list.length == 0) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
@@ -1030,7 +1124,7 @@ export default function LinkedList(props) {
         m = document.getElementById("barContainer");
         m.children[k].children[0].children[0].id = "bar" + k;
         m.children[k].children[1].id = "title" + k;
-        for (let j = 1; j < 4; j++) {
+        for (let j = 1; j < 7; j++) {
           m.children[k].children[0].children[j].children[0].classList.remove(
             "arrow-" + (k + 1)
           );
@@ -1039,6 +1133,17 @@ export default function LinkedList(props) {
           );
         }
       }
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      b[4].classList.add("bg-gray-700");
+      txt = "Set head.prev to null for consistency purpose.";
+      c.innerText = txt;
+      msg.text = txt;
+      speech.speak(msg);
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
@@ -1053,22 +1158,16 @@ export default function LinkedList(props) {
     if empty, do nothing
     </div>
     <div class="px-2" id="br2">
-    Vertex pre = head
+    tmp = tail
     </div>
     <div class="px-2" id="br3">
-    tmp = head.next
+    tail = tail.prev
     </div>
     <div class="px-2" id="br4">
-    while (tmp.next != null)
+    tail.next = null
     </div>
-    <div class="px-2 pl-5" id="br5">
-      pre = pre.next
-    </div>
-    <div class="px-2" id="br6">
-    pre.next = null
-    </div>
-    <div class="px-2" id="br7">
-    delete tmp, tail = pre
+    <div class="px-2" id="br5">
+    delete tmp
     </div>`;
     let txt,
       c = document.getElementById("textContainer"),
@@ -1081,8 +1180,6 @@ export default function LinkedList(props) {
       document.getElementById("br3"),
       document.getElementById("br4"),
       document.getElementById("br5"),
-      document.getElementById("br6"),
-      document.getElementById("br7"),
     ];
     if (list.length == 0) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
@@ -1102,16 +1199,16 @@ export default function LinkedList(props) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[1].classList.add("bg-gray-700");
       txt =
-        "Set up pre pointer. pre will eventually point to the last vertex before tail.";
+        "Set tmp to (old) tail.";
       c.innerText = txt;
-      msg.text = txt;
+      msg.text = "Set temp to (old) tail.";
       speech.speak(msg);
-      let p = a[0];
+      let p = a[list.length-1];
       p.classList.add("border-yellow-500");
       p.classList.add("bg-yellow-500");
       p.classList.add("text-white");
-      let tr1 = document.getElementById("title0");
-      tr1.innerHTML = "<b>h/p</b>";
+      let tr1 = document.getElementById("title"+(list.length-1));
+      tr1.innerHTML = "<b>tail/tmp</b>";
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
@@ -1120,113 +1217,43 @@ export default function LinkedList(props) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[2].classList.add("bg-gray-700");
       txt =
-        "Set up tmp pointer. tmp will eventually point to the current tail.";
+        "Set tail to tail.prev";
       c.innerText = txt;
-      msg.text =
-        "Set up temp pointer. tmp will eventually point to the current tail.";
+      msg.text =txt;
       speech.speak(msg);
-      let ar = document.getElementsByClassName("arrow-0");
-      ar[0].classList.add("bg-yellow-500");
-      let t = a[1];
+      let ar = document.getElementsByClassName("arrow-"+(list.length-2));
+      ar[3].classList.add("bg-yellow-500");
+      let t = a[list.length-2];
       t.classList.add("border-green-500");
       t.classList.add("bg-green-500");
       t.classList.add("text-white");
-      let tr2 = document.getElementById("title1");
-      tr2.innerHTML = "<b>tmp</b>";
+      tr1.innerHTML = "<b>tmp</b>";
+      let tr2 = document.getElementById("title"+(list.length-2));
+      tr2.innerHTML = "<b>temp</b>";
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
         });
       });
-      for (let i = 2; i <= list.length; i++) {
         for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
         b[3].classList.add("bg-gray-700");
-        txt = "Check if tmp.next is null.";
+        b[4].classList.add("bg-gray-700");
+        txt = "Set the next of (new) tail to null; Delete tmp.";
         c.innerText = txt;
-        msg.text = "Check if temp.next is null.";
+        msg.text = "Set the next of (new) tail to null; Delete temp.";
         speech.speak(msg);
-        ar[0].classList.remove("bg-yellow-500");
-        await new Promise((resolve) => {
-          msg.addEventListener("end", () => {
-            resolve();
-          });
-        });
-        if (i != list.length) {
-          for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
-          b[4].classList.add("bg-gray-700");
-          txt =
-            "It is not null. So both pre and tmp pointers advance to their next vertex.";
-          c.innerText = txt;
-          msg.text =
-            "It is not null. So both pre and temp pointers advance to their next vertex.";
-          speech.speak(msg);
-          p.classList.remove("bg-yellow-500");
-          p.classList.remove("bg-green-500");
-          p.classList.remove("text-white");
-          p.classList.add("text-yellow-500");
-          ar[0].classList.add("bg-yellow-500");
-          p = t;
-          p.classList.add("border-yellow-500");
-          p.classList.add("bg-yellow-500");
-          p.classList.add("text-white");
-          tr1.innerHTML = "";
-          if (i == 2) document.getElementById("title0").innerHTML = "<b>head/0";
-          tr1 = document.getElementById("title" + (i - 1));
-          tr1.innerHTML = "<b>p</b>";
-          ar = document.getElementsByClassName("arrow-" + (i - 1));
-          ar[0].classList.add("bg-yellow-500");
-          t = a[i];
-          t.classList.add("border-green-500");
-          t.classList.add("bg-green-500");
-          t.classList.add("text-white");
-          tr2 = document.getElementById("title" + i);
-          if (i == list.length - 1) tr2.innerHTML = "<b>t/tmp</b>";
-          else tr2.innerHTML = "<b>tmp</b>";
-          await new Promise((resolve) => {
-            msg.addEventListener("end", () => {
-              resolve();
-            });
-          });
-        } else {
-          for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
-          b[5].classList.add("bg-gray-700");
-          txt = "It is null. So set the next of pre (the new tail) to null.";
-          c.innerText = txt;
-          msg.text = txt;
-          speech.speak(msg);
-          ar[0].classList.remove("bg-yellow-500");
-          ar[0].classList.remove("bg-black");
-          ar[1].classList.add("hidden");
-          ar[2].classList.add("hidden");
-          await new Promise((resolve) => {
-            msg.addEventListener("end", () => {
-              resolve();
-            });
-          });
-          for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
-          b[5].classList.add("bg-gray-700");
-          txt =
-            "Delete tmp (the previous tail) then update the tail pointer to pre (the current tail).";
-          c.innerText = txt;
-          msg.text =
-            "Delete temp (the previous tail) then update the tail pointer to pre (the current tail).";
-          speech.speak(msg);
-          p.classList.remove("bg-yellow-500");
-          p.classList.remove("border-yellow-500");
-          p.classList.add("border-green-500");
-          p.classList.add("bg-green-500");
           n.removeChild(n.children[n.children.length - 1]);
           ar[0].classList.add("hidden");
-          ar[0].classList.add("bg-black");
           ar[1].classList.add("hidden");
           ar[2].classList.add("hidden");
+          ar[3].classList.add("hidden");
+          ar[4].classList.add("hidden");
+          ar[5].classList.add("hidden");
           await new Promise((resolve) => {
             msg.addEventListener("end", () => {
               resolve();
             });
           });
-        }
-      }
       newList(list.slice(0, list.length - 1));
     }
   }
@@ -1248,7 +1275,7 @@ export default function LinkedList(props) {
     Vertex del = pre.next, aft = del.next
     </div>
     <div class="px-2" id="br5">
-    pre.next = aft // bypass del
+    pre.next = aft, aft.prev = pre
     </div>
     <div class="px-2" id="br6">
     delete del
@@ -1343,9 +1370,11 @@ export default function LinkedList(props) {
     p.classList.add("text-white");
     if (m - 2 == 0)
       document.getElementById("title" + (m - 2)).innerHTML = "<b>head/0</b>";
-    if (m - 2 != 0) document.getElementById("title" + (m - 2)).innerHTML = "";
-    tr1 = document.getElementById("title" + (m - 1));
-    tr1.innerHTML = "<b>p/" + (m - 1) + "</b>";
+    if (m - 2 > 0) document.getElementById("title" + (m - 2)).innerHTML = "";
+    if (m - 1 > 0) {
+      tr1 = document.getElementById("title" + (m - 1));
+      tr1.innerHTML = "<b>p/" + (m - 1) + "</b>";
+    }
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -1360,8 +1389,10 @@ export default function LinkedList(props) {
     speech.speak(msg);
     ar = document.getElementsByClassName("arrow-" + (m - 1));
     ar[0].classList.add("bg-yellow-500");
+    ar[3].classList.add("bg-yellow-500");
     let ar1 = document.getElementsByClassName("arrow-" + m);
     ar1[0].classList.add("bg-yellow-500");
+    ar1[3].classList.add("bg-yellow-500");
     let ai = a[m];
     ai.classList.add("border-red-500");
     ai.classList.add("bg-red-500");
@@ -1389,30 +1420,36 @@ export default function LinkedList(props) {
     n.children[m].style.transform = `translateY(-5rem)`;
     ar1[0].parentElement.classList.add("absolute");
     ar1[0].style.transition = "all 0s ease-out";
-    ar1[0].classList.add("relative");
-    ar1[0].classList.add("w-[65px]");
-    ar1[0].classList.add("left-[2.45rem]");
+    ar1[3].style.transition = "all 0s ease-out";
+    ar1[3].classList.add("hidden");
+    ar1[4].classList.add("hidden");
+    ar1[5].classList.add("hidden");
+    ar1[0].classList.add("w-[69px]");
+    ar1[0].classList.add("left-[-1.5rem]");
     ar1[0].classList.add("top-[50px]");
     ar1[0].classList.add("rotate-[55deg]");
-    ar1[1].classList.add("top-[76.5px]");
+    ar1[1].classList.add("top-[79.5px]");
     ar1[1].classList.add("rotate-[15deg]");
-    ar1[1].classList.add("left-[4.85rem]");
-    ar1[2].classList.add("top-[73px]");
-    ar1[2].classList.add("rotate-[110deg]");
-    ar1[2].classList.add("left-[5.4rem]");
+    ar1[1].classList.add("left-[5.5rem]");
+    ar1[2].classList.add("top-[78px]");
+    ar1[2].classList.add("rotate-[130deg]");
+    ar1[2].classList.add("left-[5.75rem]");
     const newE = document.createElement("div");
     newE.classList.add("absolute");
     newE.innerHTML = `<hr
-    class="w-[4.4rem] h-1 bg-yellow-500 relative left-[1rem] top-2"
+    class="w-[6rem] h-1 bg-yellow-500 relative left-[1rem] top-1.5"
     />`;
     ar[0].parentElement.appendChild(newE);
-    ar[1].classList.add("left-[8.55rem]");
-    ar[2].classList.add("left-[8.55rem]");
+    ar[1].classList.add("left-[10.3rem]");
+    ar[2].classList.add("left-[10.3rem]");
+    ar[3].classList.add("w-[7rem]");
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
       });
     });
+    ar1[0].style.transition = "all 3s ease-out";
+    ar1[3].style.transition = "all 3s ease-out";
     for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
     b[5].classList.add("bg-gray-700");
     txt = "Now we delete this vertex.";
@@ -1447,16 +1484,36 @@ export default function LinkedList(props) {
       n.children[k - 1].children[0].children[3].children[0].classList.add(
         "arrow-" + (k - 1)
       );
+      n.children[k - 1].children[0].children[4].children[0].classList.remove(
+        "arrow-" + k
+      );
+      n.children[k - 1].children[0].children[4].children[0].classList.add(
+        "arrow-" + (k - 1)
+      );
+      n.children[k - 1].children[0].children[5].children[0].classList.remove(
+        "arrow-" + k
+      );
+      n.children[k - 1].children[0].children[5].children[0].classList.add(
+        "arrow-" + (k - 1)
+      );
+      n.children[k - 1].children[0].children[6].children[0].classList.remove(
+        "arrow-" + k
+      );
+      n.children[k - 1].children[0].children[6].children[0].classList.add(
+        "arrow-" + (k - 1)
+      );
     }
+    ar[0].parentElement.removeChild(ar[0].parentElement.children[1]);
+    ar[0].classList.remove("bg-yellow-500");
+    ar[3].classList.remove("w-[7rem]");
+    ar[3].classList.remove("bg-yellow-500");
+    ar[1].classList.remove("left-[10.3rem]");
+    ar[2].classList.remove("left-[10.3rem]");
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
       });
     });
-    ar[0].parentElement.removeChild(ar[0].parentElement.children[1]);
-    ar[0].classList.remove("bg-yellow-500");
-    ar[1].classList.remove("left-[8.55rem]");
-    ar[2].classList.remove("left-[8.55rem]");
     newList([...list.slice(0, m), ...list.slice(m + 1, list.length)]);
   }
 
@@ -1641,14 +1698,23 @@ export default function LinkedList(props) {
                     >
                       ${val}
                     </div>
-                    <div>
-                      <hr class="w-5 h-1 bg-black relative top-3 transition ease-in-out duration-[3s] arrow-${ind}" />
+                    <div class="relative w-5">
+                      <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-${ind}" />
                     </div>
                     <div class="absolute">
-                      <hr class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-${ind}" />
+                      <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${ind}" />
                     </div>
                     <div class="absolute">
-                      <hr class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-${ind}" />
+                      <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-${ind}" />
+                    </div>
+                    <div class="absolute">
+                      <hr class="w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-${ind}"  />
+                    </div>
+                    <div class="absolute">
+                      <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-${ind}" />
+                    </div>
+                    <div class="absolute">
+                      <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-${ind}" />
                     </div>
                   </div>
                     <div
@@ -1714,14 +1780,23 @@ export default function LinkedList(props) {
                         >
                           ${val}
                         </div>
-                        <div>
-                          <hr class="w-5 h-1 bg-black relative top-3 transition ease-in-out duration-[3s] arrow-${ind}" />
+                        <div class="relative w-5">
+                          <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-${ind}" />
                         </div>
                         <div class="absolute">
-                          <hr class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-${ind}" />
+                          <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${ind}" />
                         </div>
                         <div class="absolute">
-                          <hr class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-${ind}" />
+                          <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-${ind}" />
+                        </div>
+                        <div class="absolute">
+                          <hr class="w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-${ind}"  />
+                        </div>
+                        <div class="absolute">
+                          <hr class="w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-${ind}" />
+                        </div>
+                        <div class="absolute">
+                          <hr class="w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-${ind}" />
                         </div>
                       </div>
                         <div

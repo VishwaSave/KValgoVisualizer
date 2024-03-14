@@ -21,13 +21,16 @@ export default function ListR() {
     n.children[1].classList.add("hidden");
     n.children[2].classList.add("hidden");
     n.children[3].classList.add("hidden");
+    n.children[4].classList.add("hidden");
+    n.children[5].classList.add("hidden");
+    n.children[6].classList.add("hidden");
   }, [list]);
   return (
     <>
       <div className="w-[100%] h-[73%] max-lg:text-[1.5rem]" id="disContainer">
         <div className=" h-[86vh] flex justify-center items-center bg-gray-200 pr-[2rem] mx-[3rem]">
           <div
-            className="w-[100%]  h-[2rem] flex justify-center max-sm:hidden max-h-array-ins"
+            className="w-[100%]  h-[2rem] flex justify-center relative bottom-[100px] max-sm:hidden max-h-array-ins"
             id="barContainer"
           >
             {list.map((val, ind) => {
@@ -40,17 +43,17 @@ export default function ListR() {
                     >
                       {val}
                     </div>
-                    <div>
+                    <div className="relative w-5">
                       <hr
                         className={
-                          "w-5 h-1 bg-black relative top-3 transition ease-in-out duration-[3s] arrow-" + ind
+                          "w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-" + ind
                         }
                       />
                     </div>
                     <div className="absolute">
                       <hr
                         className={
-                          "w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-" +
+                          "w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-" +
                           ind
                         }
                       />
@@ -58,7 +61,30 @@ export default function ListR() {
                     <div className="absolute">
                       <hr
                         className={
-                          "w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-" +
+                          "w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-" +
+                          ind
+                        }
+                      />
+                    </div>
+                    <div className="absolute">
+                      <hr
+                        className={
+                          "w-7 h-1 bg-black relative right-[-3.8rem] top-5 transition ease-in-out duration-[3s] arrow-" + ind
+                        }
+                      />
+                    </div>
+                    <div className="absolute">
+                      <hr
+                        className={
+                          "w-2 h-1 bg-black border-0 relative top-[23px] left-[3.75rem] rotate-45 arrow-" +
+                          ind
+                        }
+                      />
+                    </div>
+                    <div className="absolute">
+                      <hr
+                        className={
+                          "w-2 h-1 bg-black border-0 relative top-[19px] left-[3.8rem] rotate-[140deg] arrow-" +
                           ind
                         }
                       />

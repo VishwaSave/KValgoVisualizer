@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Component/Home";
 import Sorting from "./Component/SortingAlgo/Sorting";
 import LinkedListVisualizer from "./Component/LinkedList/LinkedList";
-import BST from "./Component/BST/bst";
+import Array from "./Component/Array/array";
 function App() {
   return (
     <BrowserRouter>
@@ -11,7 +11,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sorting-algorithms" element={<Sorting />} />
         <Route path="/linkedlist-algorithms" element={<LinkedListVisualizer />} />
-        <Route path="/bst-algorithms" element={<BST />} />
+        <Route path="/array-algorithms" element={<Array />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const BST = () => {
+const Array = () => {
   return (
     <div className="w-[100vw] h-[100vh]">
       <div className="w-[100%] absolute h-[3.2rem] bg-gray-900 text-white max-sm:h-[20rem]">
@@ -24,4 +24,4 @@ const BST = () => {
   );
 };
 
-export default BST;
+export default Array;

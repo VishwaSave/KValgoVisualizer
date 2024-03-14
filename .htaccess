@@ -1,0 +1,12 @@
+# HTID:23018777: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:23018777:
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %sorting-algorithms !-f
+RewriteCond %linkedlist-algorithms !-d
+RewriteCond %array-algorithms !-d
+
+RewriteRule ^(.*)$ index.html [L]

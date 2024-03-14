@@ -324,11 +324,6 @@ export default function LinkedList(props) {
       c.innerText = txt;
       msg.text = txt;
       speech.speak(msg);
-      await new Promise((resolve) => {
-        msg.addEventListener("end", () => {
-          resolve();
-        });
-      });
       n.children[0].innerHTML = `<div class="flex">
       <div
       class="w-[4rem] h-[2rem] max-lg:w-[5rem] pb-[1.4rem] max-lg:pb-[2.1rem] text-center border-4 border-black border-green-500 bg-green-500 rounded-[50%] z-10 font-extrabold text-white"
@@ -356,6 +351,11 @@ export default function LinkedList(props) {
         class="w-[4rem] max-lg:w-[5rem] text-center text-red-700"
         id="title0"
         ><b>head/tail/0</b></div>`;
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
     } else {
       document.getElementById("codeContainer").innerHTML = `
       <div class="px-2" id="br1">
@@ -754,7 +754,7 @@ export default function LinkedList(props) {
     p.classList.add("text-white");
     if (m - 2 == 0)
       document.getElementById("title" + (m - 2)).innerHTML = "<b>head/0</b>";
-    if (m - 2 != 0) document.getElementById("title" + (m - 2)).innerHTML = "";
+    if (m - 2 > 0) document.getElementById("title" + (m - 2)).innerHTML = "";
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -1343,9 +1343,11 @@ export default function LinkedList(props) {
     p.classList.add("text-white");
     if (m - 2 == 0)
       document.getElementById("title" + (m - 2)).innerHTML = "<b>head/0</b>";
-    if (m - 2 != 0) document.getElementById("title" + (m - 2)).innerHTML = "";
-    tr1 = document.getElementById("title" + (m - 1));
-    tr1.innerHTML = "<b>p/" + (m - 1) + "</b>";
+    if (m - 2 > 0) document.getElementById("title" + (m - 2)).innerHTML = "";
+    if (m - 1 > 0) {
+      tr1 = document.getElementById("title" + (m - 1));
+      tr1.innerHTML = "<b>p/" + (m - 1) + "</b>";
+    }
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
@@ -1396,9 +1398,9 @@ export default function LinkedList(props) {
     ar1[0].classList.add("rotate-[55deg]");
     ar1[1].classList.add("top-[76.5px]");
     ar1[1].classList.add("rotate-[15deg]");
-    ar1[1].classList.add("left-[4.85rem]");
+    ar1[1].classList.add("left-[4.95rem]");
     ar1[2].classList.add("top-[73px]");
-    ar1[2].classList.add("rotate-[110deg]");
+    ar1[2].classList.add("rotate-[120deg]");
     ar1[2].classList.add("left-[5.4rem]");
     const newE = document.createElement("div");
     newE.classList.add("absolute");
@@ -1448,15 +1450,15 @@ export default function LinkedList(props) {
         "arrow-" + (k - 1)
       );
     }
+    ar[0].parentElement.removeChild(ar[0].parentElement.children[1]);
+    ar[0].classList.remove("bg-yellow-500");
+    ar[1].classList.remove("left-[8.55rem]");
+    ar[2].classList.remove("left-[8.55rem]");
     await new Promise((resolve) => {
       msg.addEventListener("end", () => {
         resolve();
       });
     });
-    ar[0].parentElement.removeChild(ar[0].parentElement.children[1]);
-    ar[0].classList.remove("bg-yellow-500");
-    ar[1].classList.remove("left-[8.55rem]");
-    ar[2].classList.remove("left-[8.55rem]");
     newList([...list.slice(0, m), ...list.slice(m + 1, list.length)]);
   }
 
