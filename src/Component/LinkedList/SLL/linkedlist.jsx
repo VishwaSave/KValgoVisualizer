@@ -1626,9 +1626,8 @@ export default function LinkedList(props) {
                 document.getElementById("play/pause").src = play;
                 let list = [];
                 let i,
-                  a = parseInt(Math.random() * 10);
-                let b = a >= 3 ? a : 5;
-                for (i = 0; i < b; i++) {
+                  a = parseInt(Math.floor(Math.random() * 10) + 1);
+                for (i = 0; i < a; i++) {
                   list[i] = parseInt(Math.floor(Math.random() * 199) - 99);
                 }
                 let o = document.getElementById("barContainer");
@@ -1704,9 +1703,10 @@ export default function LinkedList(props) {
                       let regex = /^(-?\d{1,2},){0,10}-?\d{1,2}$/;
                       if (regex.test(m.value)) {
                         let n = m.value.split(",");
-                        let o = document.getElementById("barContainer");
-                        o.innerHTML = ``;
-                        n.map((val, ind) => {
+                        if (n.length <= 10) {
+                          let o = document.getElementById("barContainer");
+                          o.innerHTML = ``;
+                          n.map((val, ind) => {
                           o.innerHTML += `
                       <div>
                       <div class="flex">
@@ -1720,7 +1720,7 @@ export default function LinkedList(props) {
                           <hr class="w-5 h-1 bg-black relative top-3 transition ease-in-out duration-[3s] arrow-${ind}" />
                         </div>
                         <div class="absolute">
-                          <hr class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-${ind}" />
+                        <hr class="w-3 h-1 bg-black relative top-2 left-[4.65rem] rotate-45 arrow-${ind}" />
                         </div>
                         <div class="absolute">
                           <hr class="w-3 h-1 bg-black relative top-4 left-[4.65rem] rotate-[140deg] arrow-${ind}" />
@@ -1729,15 +1729,16 @@ export default function LinkedList(props) {
                         <div
                           class="w-[4rem] max-lg:w-[5rem] text-center text-red-700"
                           id="title${ind}"
-                        >
-                        </div>
+                          >
+                          </div>
                       </div>`;
                         });
                         newList(
                           n.map((val, ind) => {
                             return parseInt(val);
                           })
-                        );
+                          );
+                        } else alert("Sorry, the maximum size is 10");
                       } else {
                         alert(
                           "!! Invalid list !! Please provide a valid list which consist of only numbers between -99 and 99 and comma (,) and upto 10 elements/numbers are allowed"
@@ -1849,8 +1850,9 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = document.getElementById("newInsert1").value;
-                  document.getElementById("newInsert1").value = parseInt(
+                  if (list.length <= 9) {
+                    let m = document.getElementById("newInsert1").value;
+                    document.getElementById("newInsert1").value = parseInt(
                     Math.floor(Math.random() * 199) - 99
                   );
                   let op = [...document.getElementsByClassName("hide")];
@@ -1875,6 +1877,7 @@ export default function LinkedList(props) {
                   document.getElementById("play/pause").src = pause;
                   document.getElementById("subUserInp").classList.add("hidden");
                   insertB(m);
+                } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go
@@ -1895,8 +1898,9 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem] ml-[2rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = document.getElementById("newInsert2").value;
-                  document.getElementById("newInsert2").value = parseInt(
+                  if (list.length <= 9) {
+                    let m = document.getElementById("newInsert2").value;
+                    document.getElementById("newInsert2").value = parseInt(
                     Math.floor(Math.random() * 199) - 99
                   );
                   let op = [...document.getElementsByClassName("hide")];
@@ -1914,13 +1918,14 @@ export default function LinkedList(props) {
                     .getElementById("textContainer")
                     .classList.remove("hidden");
                   document
-                    .getElementById("newListContainer")
-                    .classList.add("hidden");
+                  .getElementById("newListContainer")
+                  .classList.add("hidden");
                   speech.cancel();
                   document.getElementById("ppcont").disabled = false;
                   document.getElementById("play/pause").src = pause;
                   document.getElementById("subUserInp").classList.add("hidden");
                   insertA(m);
+                } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go
@@ -1950,8 +1955,9 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = parseInt(document.getElementById("newInserti").value);
-                  document.getElementById("newInserti").value = parseInt(
+                  if (list.length <= 9) {
+                    let m = parseInt(document.getElementById("newInserti").value);
+                    document.getElementById("newInserti").value = parseInt(
                     Math.floor(Math.random() * (list.length - 1)) + 1
                   );
                   let m1 = parseInt(
@@ -1981,34 +1987,35 @@ export default function LinkedList(props) {
                         `Please enter a valid index between [1..${
                           list.length - 1
                         }].`
-                      );
-                    }
-                  } else {
-                    let op = [...document.getElementsByClassName("hide")];
-                    op.map((v) => {
-                      v.classList.add("hidden");
-                    });
-                    document.getElementById("stbtn").innerText = ">";
-                    document.getElementById("sort").classList.add("hidden");
-                    document.getElementById("cdbtn").innerText = ">";
-                    document
+                        );
+                      }
+                    } else {
+                      let op = [...document.getElementsByClassName("hide")];
+                      op.map((v) => {
+                        v.classList.add("hidden");
+                      });
+                      document.getElementById("stbtn").innerText = ">";
+                      document.getElementById("sort").classList.add("hidden");
+                      document.getElementById("cdbtn").innerText = ">";
+                      document
                       .getElementById("codeContainer")
                       .classList.remove("hidden");
-                    document.getElementById("ttbtn").innerText = ">";
-                    document
+                      document.getElementById("ttbtn").innerText = ">";
+                      document
                       .getElementById("textContainer")
                       .classList.remove("hidden");
-                    document
+                      document
                       .getElementById("newListContainer")
                       .classList.add("hidden");
-                    speech.cancel();
-                    document.getElementById("ppcont").disabled = false;
-                    document.getElementById("play/pause").src = pause;
-                    document
+                      speech.cancel();
+                      document.getElementById("ppcont").disabled = false;
+                      document.getElementById("play/pause").src = pause;
+                      document
                       .getElementById("subUserInp")
                       .classList.add("hidden");
-                    insertS(m, m1);
-                  }
+                      insertS(m, m1);
+                    }
+                  } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go

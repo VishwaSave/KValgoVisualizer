@@ -84,10 +84,7 @@ export default function LinkedList(props) {
       c = document.getElementById("textContainer"),
       k;
     let count = 0;
-    b = [
-      document.getElementById("br1"),
-      document.getElementById("br2"),
-    ];
+    b = [document.getElementById("br1"), document.getElementById("br2")];
     if (list.length == 0) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[0].classList.add("bg-gray-700");
@@ -103,7 +100,7 @@ export default function LinkedList(props) {
     } else {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[1].classList.add("bg-gray-700");
-      txt ="Return the value stored at the head: "+list[0]+".";
+      txt = "Return the value stored at the head: " + list[0] + ".";
       c.innerText = txt;
       msg.text = txt;
       speech.speak(msg);
@@ -129,10 +126,7 @@ export default function LinkedList(props) {
       c = document.getElementById("textContainer"),
       k;
     let count = 0;
-    b = [
-      document.getElementById("br1"),
-      document.getElementById("br2"),
-    ];
+    b = [document.getElementById("br1"), document.getElementById("br2")];
     if (list.length == 0) {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[0].classList.add("bg-gray-700");
@@ -148,13 +142,14 @@ export default function LinkedList(props) {
     } else {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[1].classList.add("bg-gray-700");
-      txt ="Return the value stored at the tail: "+list[list.length-1]+".";
+      txt =
+        "Return the value stored at the tail: " + list[list.length - 1] + ".";
       c.innerText = txt;
       msg.text = txt;
       speech.speak(msg);
-      a[list.length-1].classList.add("border-yellow-500");
-      a[list.length-1].classList.add("bg-yellow-500");
-      a[list.length-1].classList.add("text-white");
+      a[list.length - 1].classList.add("border-yellow-500");
+      a[list.length - 1].classList.add("bg-yellow-500");
+      a[list.length - 1].classList.add("text-white");
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
@@ -559,12 +554,16 @@ export default function LinkedList(props) {
               class="w-[100%] h-10 mt-1 bg-yellow-600 text-center max-h-newList"
               onClick={(e) => {
                 e.preventDefault();
-                a[0].classList.remove("border-yellow-500");
-                a[0].classList.remove("bg-yellow-500");
-                a[0].classList.remove("text-white");
-                a[list.length-1].classList.remove("border-yellow-500");
-                a[list.length-1].classList.remove("bg-yellow-500");
-                a[list.length-1].classList.remove("text-white");
+                if (a[0]) {
+                  a[0].classList.remove("border-yellow-500");
+                  a[0].classList.remove("bg-yellow-500");
+                  a[0].classList.remove("text-white");
+                }
+                if (a[list.length - 1]) {
+                  a[list.length - 1].classList.remove("border-yellow-500");
+                  a[list.length - 1].classList.remove("bg-yellow-500");
+                  a[list.length - 1].classList.remove("text-white");
+                }
                 let op = [...document.getElementsByClassName("hide")];
                 op.map((v) => {
                   v.classList.add("hidden");
@@ -586,8 +585,8 @@ export default function LinkedList(props) {
                 document.getElementById("ppcont").disabled = false;
                 document.getElementById("play/pause").src = pause;
                 document.getElementById("subUserInp").classList.add("hidden");
-                 removeB();
-                }}
+                removeB();
+              }}
             >
               Dequeue
             </button>
@@ -615,9 +614,8 @@ export default function LinkedList(props) {
                 document.getElementById("play/pause").src = play;
                 let list = [];
                 let i,
-                  a = parseInt(Math.random() * 10);
-                let b = a >= 3 ? a : 5;
-                for (i = 0; i < b; i++) {
+                  a = parseInt(Math.floor(Math.random() * 10) + 1);
+                for (i = 0; i < a; i++) {
                   list[i] = parseInt(Math.floor(Math.random() * 199) - 99);
                 }
                 let o = document.getElementById("barContainer");
@@ -693,10 +691,11 @@ export default function LinkedList(props) {
                       let regex = /^(-?\d{1,2},){0,10}-?\d{1,2}$/;
                       if (regex.test(m.value)) {
                         let n = m.value.split(",");
-                        let o = document.getElementById("barContainer");
-                        o.innerHTML = ``;
-                        n.map((val, ind) => {
-                          o.innerHTML += `
+                        if (n.length <= 10) {
+                          let o = document.getElementById("barContainer");
+                          o.innerHTML = ``;
+                          n.map((val, ind) => {
+                            o.innerHTML += `
                       <div>
                       <div class="flex">
                         <div
@@ -721,12 +720,13 @@ export default function LinkedList(props) {
                         >
                         </div>
                       </div>`;
-                        });
-                        newList(
-                          n.map((val, ind) => {
-                            return parseInt(val);
-                          })
-                        );
+                          });
+                          newList(
+                            n.map((val, ind) => {
+                              return parseInt(val);
+                            })
+                          );
+                        } else alert("Sorry, the maximum size is 10");
                       } else {
                         alert(
                           "!! Invalid list !! Please provide a valid list which consist of only numbers between -99 and 99 and comma (,) and upto 10 elements/numbers are allowed"
@@ -748,12 +748,16 @@ export default function LinkedList(props) {
               class="bg-green-500 px-[0.5rem] mr-4"
               onClick={(e) => {
                 e.preventDefault();
-                a[0].classList.remove("border-yellow-500");
-                a[0].classList.remove("bg-yellow-500");
-                a[0].classList.remove("text-white");
-                a[list.length-1].classList.remove("border-yellow-500");
-                a[list.length-1].classList.remove("bg-yellow-500");
-                a[list.length-1].classList.remove("text-white");
+                if (a[0]) {
+                  a[0].classList.remove("border-yellow-500");
+                  a[0].classList.remove("bg-yellow-500");
+                  a[0].classList.remove("text-white");
+                }
+                if (a[list.length - 1]) {
+                  a[list.length - 1].classList.remove("border-yellow-500");
+                  a[list.length - 1].classList.remove("bg-yellow-500");
+                  a[list.length - 1].classList.remove("text-white");
+                }
                 let op = [...document.getElementsByClassName("hide")];
                 op.map((v) => {
                   v.classList.add("hidden");
@@ -784,12 +788,16 @@ export default function LinkedList(props) {
               class="bg-green-500 px-[0.5rem] mr-4"
               onClick={(e) => {
                 e.preventDefault();
-                a[0].classList.remove("border-yellow-500");
-                a[0].classList.remove("bg-yellow-500");
-                a[0].classList.remove("text-white");
-                a[list.length-1].classList.remove("border-yellow-500");
-                a[list.length-1].classList.remove("bg-yellow-500");
-                a[list.length-1].classList.remove("text-white");
+                if (a[0]) {
+                  a[0].classList.remove("border-yellow-500");
+                  a[0].classList.remove("bg-yellow-500");
+                  a[0].classList.remove("text-white");
+                }
+                if (a[list.length - 1]) {
+                  a[list.length - 1].classList.remove("border-yellow-500");
+                  a[list.length - 1].classList.remove("bg-yellow-500");
+                  a[list.length - 1].classList.remove("text-white");
+                }
                 let op = [...document.getElementsByClassName("hide")];
                 op.map((v) => {
                   v.classList.add("hidden");
@@ -833,36 +841,46 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  a[0].classList.remove("border-yellow-500");
-                  a[0].classList.remove("bg-yellow-500");
-                  a[0].classList.remove("text-white");
-                  a[list.length-1].classList.remove("border-yellow-500");
-                  a[list.length-1].classList.remove("bg-yellow-500");
-                  a[list.length-1].classList.remove("text-white");
-                  let op = [...document.getElementsByClassName("hide")];
-                  op.map((v) => {
-                    v.classList.add("hidden");
-                  });
-                  document.getElementById("stbtn").innerText = ">";
-                  document.getElementById("sort").classList.add("hidden");
-                  document.getElementById("cdbtn").innerText = ">";
-                  document
-                    .getElementById("codeContainer")
-                    .classList.remove("hidden");
-                  document.getElementById("ttbtn").innerText = ">";
-                  document
-                    .getElementById("textContainer")
-                    .classList.remove("hidden");
-                  document
-                    .getElementById("newListContainer")
-                    .classList.add("hidden");
-                  speech.cancel();
-                  document.getElementById("ppcont").disabled = false;
-                  document.getElementById("play/pause").src = pause;
-                  document.getElementById("subUserInp").classList.add("hidden");
-                  let enq=document.getElementById('newEnQueue').value;
-                  insertA(parseInt(enq));
-                  document.getElementById('newEnQueue').value=parseInt(Math.floor(Math.random() * 199) - 99)
+                  if (a[0]) {
+                    a[0].classList.remove("border-yellow-500");
+                    a[0].classList.remove("bg-yellow-500");
+                    a[0].classList.remove("text-white");
+                  }
+                  if (a[list.length - 1]) {
+                    a[list.length - 1].classList.remove("border-yellow-500");
+                    a[list.length - 1].classList.remove("bg-yellow-500");
+                    a[list.length - 1].classList.remove("text-white");
+                  }
+                  if (list.length <= 9) {
+                    let op = [...document.getElementsByClassName("hide")];
+                    op.map((v) => {
+                      v.classList.add("hidden");
+                    });
+                    document.getElementById("stbtn").innerText = ">";
+                    document.getElementById("sort").classList.add("hidden");
+                    document.getElementById("cdbtn").innerText = ">";
+                    document
+                      .getElementById("codeContainer")
+                      .classList.remove("hidden");
+                    document.getElementById("ttbtn").innerText = ">";
+                    document
+                      .getElementById("textContainer")
+                      .classList.remove("hidden");
+                    document
+                      .getElementById("newListContainer")
+                      .classList.add("hidden");
+                    speech.cancel();
+                    document.getElementById("ppcont").disabled = false;
+                    document.getElementById("play/pause").src = pause;
+                    document
+                      .getElementById("subUserInp")
+                      .classList.add("hidden");
+                    let enq = document.getElementById("newEnQueue").value;
+                    insertA(parseInt(enq));
+                    document.getElementById("newEnQueue").value = parseInt(
+                      Math.floor(Math.random() * 199) - 99
+                    );
+                  } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go

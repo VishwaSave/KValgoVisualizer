@@ -1198,16 +1198,15 @@ export default function LinkedList(props) {
     } else {
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[1].classList.add("bg-gray-700");
-      txt =
-        "Set tmp to (old) tail.";
+      txt = "Set tmp to (old) tail.";
       c.innerText = txt;
       msg.text = "Set temp to (old) tail.";
       speech.speak(msg);
-      let p = a[list.length-1];
+      let p = a[list.length - 1];
       p.classList.add("border-yellow-500");
       p.classList.add("bg-yellow-500");
       p.classList.add("text-white");
-      let tr1 = document.getElementById("title"+(list.length-1));
+      let tr1 = document.getElementById("title" + (list.length - 1));
       tr1.innerHTML = "<b>tail/tmp</b>";
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
@@ -1216,44 +1215,43 @@ export default function LinkedList(props) {
       });
       for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
       b[2].classList.add("bg-gray-700");
-      txt =
-        "Set tail to tail.prev";
+      txt = "Set tail to tail.prev";
       c.innerText = txt;
-      msg.text =txt;
+      msg.text = txt;
       speech.speak(msg);
-      let ar = document.getElementsByClassName("arrow-"+(list.length-2));
+      let ar = document.getElementsByClassName("arrow-" + (list.length - 2));
       ar[3].classList.add("bg-yellow-500");
-      let t = a[list.length-2];
+      let t = a[list.length - 2];
       t.classList.add("border-green-500");
       t.classList.add("bg-green-500");
       t.classList.add("text-white");
       tr1.innerHTML = "<b>tmp</b>";
-      let tr2 = document.getElementById("title"+(list.length-2));
+      let tr2 = document.getElementById("title" + (list.length - 2));
       tr2.innerHTML = "<b>temp</b>";
       await new Promise((resolve) => {
         msg.addEventListener("end", () => {
           resolve();
         });
       });
-        for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
-        b[3].classList.add("bg-gray-700");
-        b[4].classList.add("bg-gray-700");
-        txt = "Set the next of (new) tail to null; Delete tmp.";
-        c.innerText = txt;
-        msg.text = "Set the next of (new) tail to null; Delete temp.";
-        speech.speak(msg);
-          n.removeChild(n.children[n.children.length - 1]);
-          ar[0].classList.add("hidden");
-          ar[1].classList.add("hidden");
-          ar[2].classList.add("hidden");
-          ar[3].classList.add("hidden");
-          ar[4].classList.add("hidden");
-          ar[5].classList.add("hidden");
-          await new Promise((resolve) => {
-            msg.addEventListener("end", () => {
-              resolve();
-            });
-          });
+      for (k = 0; k < b.length; k++) b[k].classList.remove("bg-gray-700");
+      b[3].classList.add("bg-gray-700");
+      b[4].classList.add("bg-gray-700");
+      txt = "Set the next of (new) tail to null; Delete tmp.";
+      c.innerText = txt;
+      msg.text = "Set the next of (new) tail to null; Delete temp.";
+      speech.speak(msg);
+      n.removeChild(n.children[n.children.length - 1]);
+      ar[0].classList.add("hidden");
+      ar[1].classList.add("hidden");
+      ar[2].classList.add("hidden");
+      ar[3].classList.add("hidden");
+      ar[4].classList.add("hidden");
+      ar[5].classList.add("hidden");
+      await new Promise((resolve) => {
+        msg.addEventListener("end", () => {
+          resolve();
+        });
+      });
       newList(list.slice(0, list.length - 1));
     }
   }
@@ -1681,9 +1679,8 @@ export default function LinkedList(props) {
                 document.getElementById("play/pause").src = play;
                 let list = [];
                 let i,
-                  a = parseInt(Math.random() * 10);
-                let b = a >= 3 ? a : 5;
-                for (i = 0; i < b; i++) {
+                  a = parseInt(Math.floor(Math.random() * 10) + 1);
+                for (i = 0; i < a; i++) {
                   list[i] = parseInt(Math.floor(Math.random() * 199) - 99);
                 }
                 let o = document.getElementById("barContainer");
@@ -1768,10 +1765,11 @@ export default function LinkedList(props) {
                       let regex = /^(-?\d{1,2},){0,10}-?\d{1,2}$/;
                       if (regex.test(m.value)) {
                         let n = m.value.split(",");
-                        let o = document.getElementById("barContainer");
-                        o.innerHTML = ``;
-                        n.map((val, ind) => {
-                          o.innerHTML += `
+                        if (n.length <= 10) {
+                          let o = document.getElementById("barContainer");
+                          o.innerHTML = ``;
+                          n.map((val, ind) => {
+                            o.innerHTML += `
                       <div>
                       <div class="flex">
                         <div
@@ -1784,7 +1782,7 @@ export default function LinkedList(props) {
                           <hr class="w-7 h-1 bg-black absolute top-1.5 left-[-0.5rem] transition ease-in-out duration-[3s] arrow-${ind}" />
                         </div>
                         <div class="absolute">
-                          <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${ind}" />
+                        <hr class="w-2 h-1 bg-black relative top-1 left-[5.05rem] rotate-45 arrow-${ind}" />
                         </div>
                         <div class="absolute">
                           <hr class="w-2 h-1 bg-black relative top-2 left-[5.05rem] rotate-[140deg] arrow-${ind}" />
@@ -1805,17 +1803,18 @@ export default function LinkedList(props) {
                         >
                         </div>
                       </div>`;
-                        });
-                        newList(
-                          n.map((val, ind) => {
-                            return parseInt(val);
-                          })
-                        );
-                      } else {
-                        alert(
-                          "!! Invalid list !! Please provide a valid list which consist of only numbers between -99 and 99 and comma (,) and upto 10 elements/numbers are allowed"
-                        );
-                      }
+                          });
+                          newList(
+                            n.map((val, ind) => {
+                              return parseInt(val);
+                            })
+                          );
+                        } else {
+                          alert(
+                            "!! Invalid list !! Please provide a valid list which consist of only numbers between -99 and 99 and comma (,) and upto 10 elements/numbers are allowed"
+                          );
+                        }
+                      } else alert("Sorry, the maximum size is 10");
                     }}
                   >
                     Go
@@ -1922,32 +1921,36 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = document.getElementById("newInsert1").value;
-                  document.getElementById("newInsert1").value = parseInt(
-                    Math.floor(Math.random() * 199) - 99
-                  );
-                  let op = [...document.getElementsByClassName("hide")];
-                  op.map((v) => {
-                    v.classList.add("hidden");
-                  });
-                  document.getElementById("stbtn").innerText = ">";
-                  document.getElementById("sort").classList.add("hidden");
-                  document.getElementById("cdbtn").innerText = ">";
-                  document
-                    .getElementById("codeContainer")
-                    .classList.remove("hidden");
-                  document.getElementById("ttbtn").innerText = ">";
-                  document
-                    .getElementById("textContainer")
-                    .classList.remove("hidden");
-                  document
-                    .getElementById("newListContainer")
-                    .classList.add("hidden");
-                  speech.cancel();
-                  document.getElementById("ppcont").disabled = false;
-                  document.getElementById("play/pause").src = pause;
-                  document.getElementById("subUserInp").classList.add("hidden");
-                  insertB(m);
+                  if (list.length <= 9) {
+                    let m = document.getElementById("newInsert1").value;
+                    document.getElementById("newInsert1").value = parseInt(
+                      Math.floor(Math.random() * 199) - 99
+                    );
+                    let op = [...document.getElementsByClassName("hide")];
+                    op.map((v) => {
+                      v.classList.add("hidden");
+                    });
+                    document.getElementById("stbtn").innerText = ">";
+                    document.getElementById("sort").classList.add("hidden");
+                    document.getElementById("cdbtn").innerText = ">";
+                    document
+                      .getElementById("codeContainer")
+                      .classList.remove("hidden");
+                    document.getElementById("ttbtn").innerText = ">";
+                    document
+                      .getElementById("textContainer")
+                      .classList.remove("hidden");
+                    document
+                      .getElementById("newListContainer")
+                      .classList.add("hidden");
+                    speech.cancel();
+                    document.getElementById("ppcont").disabled = false;
+                    document.getElementById("play/pause").src = pause;
+                    document
+                      .getElementById("subUserInp")
+                      .classList.add("hidden");
+                    insertB(m);
+                  } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go
@@ -1968,32 +1971,36 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem] ml-[2rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = document.getElementById("newInsert2").value;
-                  document.getElementById("newInsert2").value = parseInt(
-                    Math.floor(Math.random() * 199) - 99
-                  );
-                  let op = [...document.getElementsByClassName("hide")];
-                  op.map((v) => {
-                    v.classList.add("hidden");
-                  });
-                  document.getElementById("stbtn").innerText = ">";
-                  document.getElementById("sort").classList.add("hidden");
-                  document.getElementById("cdbtn").innerText = ">";
-                  document
-                    .getElementById("codeContainer")
-                    .classList.remove("hidden");
-                  document.getElementById("ttbtn").innerText = ">";
-                  document
-                    .getElementById("textContainer")
-                    .classList.remove("hidden");
-                  document
-                    .getElementById("newListContainer")
-                    .classList.add("hidden");
-                  speech.cancel();
-                  document.getElementById("ppcont").disabled = false;
-                  document.getElementById("play/pause").src = pause;
-                  document.getElementById("subUserInp").classList.add("hidden");
-                  insertA(m);
+                  if (list.length <= 9) {
+                    let m = document.getElementById("newInsert2").value;
+                    document.getElementById("newInsert2").value = parseInt(
+                      Math.floor(Math.random() * 199) - 99
+                    );
+                    let op = [...document.getElementsByClassName("hide")];
+                    op.map((v) => {
+                      v.classList.add("hidden");
+                    });
+                    document.getElementById("stbtn").innerText = ">";
+                    document.getElementById("sort").classList.add("hidden");
+                    document.getElementById("cdbtn").innerText = ">";
+                    document
+                      .getElementById("codeContainer")
+                      .classList.remove("hidden");
+                    document.getElementById("ttbtn").innerText = ">";
+                    document
+                      .getElementById("textContainer")
+                      .classList.remove("hidden");
+                    document
+                      .getElementById("newListContainer")
+                      .classList.add("hidden");
+                    speech.cancel();
+                    document.getElementById("ppcont").disabled = false;
+                    document.getElementById("play/pause").src = pause;
+                    document
+                      .getElementById("subUserInp")
+                      .classList.add("hidden");
+                    insertA(m);
+                  } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go
@@ -2023,65 +2030,69 @@ export default function LinkedList(props) {
                 class="bg-green-700 px-[0.5rem]"
                 onClick={(e) => {
                   e.preventDefault();
-                  let m = parseInt(document.getElementById("newInserti").value);
-                  document.getElementById("newInserti").value = parseInt(
-                    Math.floor(Math.random() * (list.length - 1)) + 1
-                  );
-                  let m1 = parseInt(
-                    document.getElementById("newInsert3").value
-                  );
-                  document.getElementById("newInsert3").value = parseInt(
-                    Math.floor(Math.random() * 199) - 99
-                  );
-                  if (list.length == 0) {
-                    alert(`Please enter a valid index between [1..1].`);
-                  } else if (list.length == 1) {
-                    if (m != 1) {
-                      alert(`Please enter a valid index between [1..1].`);
-                    } else {
-                      insertA(m1);
-                    }
-                  } else if (m == 0) {
-                    alert(
-                      `Please enter a valid index between [1..${
-                        list.length - 1
-                      }].`
+                  if (list.length <= 9) {
+                    let m = parseInt(
+                      document.getElementById("newInserti").value
                     );
-                  } else if (m >= list.length) {
-                    if (m == list.length) insertA(m1);
-                    else {
+                    document.getElementById("newInserti").value = parseInt(
+                      Math.floor(Math.random() * (list.length - 1)) + 1
+                    );
+                    let m1 = parseInt(
+                      document.getElementById("newInsert3").value
+                    );
+                    document.getElementById("newInsert3").value = parseInt(
+                      Math.floor(Math.random() * 199) - 99
+                    );
+                    if (list.length == 0) {
+                      alert(`Please enter a valid index between [1..1].`);
+                    } else if (list.length == 1) {
+                      if (m != 1) {
+                        alert(`Please enter a valid index between [1..1].`);
+                      } else {
+                        insertA(m1);
+                      }
+                    } else if (m == 0) {
                       alert(
                         `Please enter a valid index between [1..${
                           list.length - 1
                         }].`
                       );
+                    } else if (m >= list.length) {
+                      if (m == list.length) insertA(m1);
+                      else {
+                        alert(
+                          `Please enter a valid index between [1..${
+                            list.length - 1
+                          }].`
+                        );
+                      }
+                    } else {
+                      let op = [...document.getElementsByClassName("hide")];
+                      op.map((v) => {
+                        v.classList.add("hidden");
+                      });
+                      document.getElementById("stbtn").innerText = ">";
+                      document.getElementById("sort").classList.add("hidden");
+                      document.getElementById("cdbtn").innerText = ">";
+                      document
+                        .getElementById("codeContainer")
+                        .classList.remove("hidden");
+                      document.getElementById("ttbtn").innerText = ">";
+                      document
+                        .getElementById("textContainer")
+                        .classList.remove("hidden");
+                      document
+                        .getElementById("newListContainer")
+                        .classList.add("hidden");
+                      speech.cancel();
+                      document.getElementById("ppcont").disabled = false;
+                      document.getElementById("play/pause").src = pause;
+                      document
+                        .getElementById("subUserInp")
+                        .classList.add("hidden");
+                      insertS(m, m1);
                     }
-                  } else {
-                    let op = [...document.getElementsByClassName("hide")];
-                    op.map((v) => {
-                      v.classList.add("hidden");
-                    });
-                    document.getElementById("stbtn").innerText = ">";
-                    document.getElementById("sort").classList.add("hidden");
-                    document.getElementById("cdbtn").innerText = ">";
-                    document
-                      .getElementById("codeContainer")
-                      .classList.remove("hidden");
-                    document.getElementById("ttbtn").innerText = ">";
-                    document
-                      .getElementById("textContainer")
-                      .classList.remove("hidden");
-                    document
-                      .getElementById("newListContainer")
-                      .classList.add("hidden");
-                    speech.cancel();
-                    document.getElementById("ppcont").disabled = false;
-                    document.getElementById("play/pause").src = pause;
-                    document
-                      .getElementById("subUserInp")
-                      .classList.add("hidden");
-                    insertS(m, m1);
-                  }
+                  } else alert("Sorry, the maximum size is 10");
                 }}
               >
                 Go
