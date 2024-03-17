@@ -1,8 +1,9 @@
 import React from 'react';
 import sortImg from '../img&other/sorting.gif'
 import list from '../img&other/list.gif'
-import array from '../img&other/array.gif'
+import array from '../img&other/array.jpg'
 import { Link } from "react-router-dom";
+import AboutUsCard from './aboutus';
 
 const HomePage = () => {
   const algorithms = [
@@ -34,12 +35,14 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+      <AboutUsCard/>
     <div className="bg-gray-900 w-[100%] text-white py-8 max-sm:h-[100px]">
       <div className="container mx-auto flex flex-col items-center max-sm:space-y-[10px]">
         <div className=" flex space-x-4 max-sm:space-x-[20px] max-sm:mt-[20px]">
-          <Link to="/about" className="hover:underline max-sm:text-[9rem]">About</Link>
-          <Link to="/team" className="hover:underline max-sm:text-[9rem]">Team</Link>
-          <Link to="/contact" className="hover:underline max-sm:text-[9rem]">Contact</Link>
+          <button className="hover:underline max-sm:text-[9rem]" onClick={(e)=>{
+            e.preventDefault();
+            document.getElementById('aboutuspage').classList.remove('hidden');
+          }}>About Us</button>
         </div>
         <div className="mt-4 max-sm:text-[8rem]">
           &copy; {new Date().getFullYear()} KValgoVisualizer. All Rights Reserved.
