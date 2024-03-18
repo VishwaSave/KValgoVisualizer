@@ -34,7 +34,7 @@ export default function Footer() {
                 ).innerHTML += `<option>${val.name}</option>`;
               }
             });
-        }, 5)}
+        }, 1)}
       </select>
       <div className="ml-4 flex">
         Speed:
