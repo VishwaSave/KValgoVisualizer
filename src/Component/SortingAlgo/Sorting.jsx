@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import Bubble from "./bubbleSort/bubble";
 import Selection from "./selSort/selection";
 import Insertion from "./insertionSort/Insertion";
+import Merge from "./mergeSort/Merge";
 import Quick from "./quickSort/quick";
 import Radix from "./radixSort/radix";
 import { Link } from "react-router-dom";
@@ -21,7 +22,7 @@ export default function Sorting() {
       newCount(count+1);
     },50);
   },[count])
-  
+
   function MoveLocate(e, nam) {
     document.getElementById('ppcont').disabled=true;
     e.currentTarget.innerText = nam;
@@ -46,6 +47,10 @@ export default function Sorting() {
 
       case "INSERTION SORT":
         newComponent(<Insertion />);
+        break;
+
+      case "MERGE SORT":
+        newComponent(<Merge />);
         break;
 
       case "QUICK SORT":
@@ -96,6 +101,9 @@ export default function Sorting() {
             <button onClick={(e) => MoveLocate(e, "INSERTION SORT")}>
               INS
             </button>
+          </div>
+          <div className="text-lg mt-[0.9rem] ml-[0.4rem] text-gray-400 max-sm:hidden">
+            <button onClick={(e) => MoveLocate(e, "MERGE SORT")}>MER</button>
           </div>
           <div className="text-lg mt-[0.9rem] ml-[0.4rem] text-gray-400 max-sm:hidden">
             <button onClick={(e) => MoveLocate(e, "QUICK SORT")}>QUI</button>
